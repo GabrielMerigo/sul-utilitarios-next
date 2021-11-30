@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const Img = styled.img`
-	background-size: 100% 100%;
-	width: 100%;
-	height: 29rem;
-	background-repeat: no-repeat;
-	border-bottom: solid 5px var(--gray-light);
-  margin-top: 2rem;
-`;
-
 export const CarList = styled.div`
   max-width: 900px;
   margin:0 auto;

@@ -3,12 +3,11 @@ import Banner from '../assets/banner-black.png';
 import { Footer } from "../components/Footer";
 import { Grid } from '@chakra-ui/react';
 import Image from 'next/image';
-import { createServer, Model } from 'miragejs';
 import {
   CarList,
   Description,
   Local,
-  Map
+  Map,
 } from '../styles/Home';
 
 import ArrowRight from '../assets/arrow-right.png';
@@ -28,88 +27,17 @@ export interface VehiclesTypes {
   id: number;
 }
 
-const vehicles = 'vehicles';
-const url = '/vehicles';
-
-createServer({
-  models: {
-    vehicles: Model
-  },
-
-  seeds(server){
-    server.db.loadData({
-      vehicles: [
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/1.png',
-          title: 'FORD ECOSPORT 2005 XLS',
-          subtitle: '1.6 Ano 2004/2005 com gnv completa, financia, recebemos troca.'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/4.png',
-          title: 'VW GOLF 1.6 GNV',
-          subtitle: 'Completo 0KM. Perfeita condições. Vale a pena comprar.'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/6.png',
-          title: 'Audi 8000 - 1.6',
-          subtitle: 'Financiado único dono. Sem gravame.'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/1.png',
-          title: 'FORD ECOSPORT 2005 XLS',
-          subtitle: '1.6 Ano 2004/2005 com gnv completa, financia, recebemos troca.'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/4.png',
-          title: 'VW GOLF 1.6 GNV',
-          subtitle: 'Unico dono e Novas rodas. 0KM rodado. Esse tá bom hein!'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/6.png',
-          title: 'VW GOLF 1.6 GNV',
-          subtitle: 'Porshe KN a diesel e 100 mil KM rodado. Bem baratinho.'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/6.png',
-          title: 'VW GOLF 1.6 GNV',
-          subtitle: 'Porshe KN a diesel e 100 mil KM rodado. Bem baratinho.'
-        },
-        {
-          img: 'https://storage.googleapis.com/golden-wind/ignite/react-native/images/6.png',
-          title: 'VW GOLF 1.6 GNV',
-          subtitle: 'Porshe KN a diesel e 100 mil KM rodado. Bem baratinho.'
-        }
-      ]
-    })
-  },
-
-  routes(){
-    this.namespace = 'api';
-
-    this.get('/vehicles', () => {
-      return this.schema.all(vehicles);
-    })
-
-    this.post(url, (schema, request) => {
-      const data = JSON.parse(request.requestBody);
-
-      return schema.create(vehicles, data)
-    })
-  }
-});
-
 export default function Home() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
-  const [firstSixVehicles, setFirstSixVehicles] = useState<VehiclesTypes[]>([])
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true)
-    api.get('/vehicles')
+    api.get('vehicles')
       .then(async response => {
-        const data = response.data.vehicles;
+        console.log(response.data)
+        const data = response.data;
         setVehicles(data);
-        setFirstSixVehicles(vehicles.slice(0, 6))
       })
       .catch(() => {
         console.log('erro ao carregamento de dados.');
@@ -117,17 +45,22 @@ export default function Home() {
       .finally(() => {
         setLoading(false);
       })
-  }, [vehicles])
+  }, [])
+
 
   return (
     <>
       <Header />
-      <div>
-        <Image src={Banner} alt="Banner" />
-      </div>
+      <Image
+        src={Banner}
+        alt="Banner"
+        placeholder="blur"
+        width={1400}
+        height={450}
+      />
       <LineTitle title="Adicionados Recentemente" />
 
-      <CarList>,
+      <CarList>
         {loading ? (
           <Spinner>
             <ImSpinner2 className="loader" />
@@ -135,7 +68,7 @@ export default function Home() {
         ) : (
           <>
             <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-              {firstSixVehicles.map(({ img, title, subtitle, formattedPrice }, index) => (
+              {vehicles.slice(0, 6).map(({ img, title, subtitle, formattedPrice }, index) => (
                 <BoxItem
                   key={index}
                   img={img}

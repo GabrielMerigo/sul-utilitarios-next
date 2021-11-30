@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { CarList, Spinner } from '../../styles/Storage';
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { LineHeaderRed } from "../../components/LineHeaderRed";
-import { VehiclesTypes } from "../index";
-import { api } from "../../services/api";
+import { CarList, Spinner } from '../styles/Storage';
+import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
+import { LineHeaderRed } from "../components/LineHeaderRed";
+import { VehiclesTypes } from "./index";
+import { api } from "../services/api";
 import { ImSpinner2 } from "react-icons/im";
-import { LineTitle } from '../../components/LineTitle';
+import { LineTitle } from '../components/LineTitle';
 
-export function Storage() {
+export default function Storage() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
   const [loading, setLoading] = useState(true);
 

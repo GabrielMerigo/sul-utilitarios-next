@@ -1,10 +1,10 @@
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { LineHeaderRed } from "../../components/LineHeaderRed";
-import { LineTitle } from "../../components/LineTitle";
-import { AboutContainer } from '../../styles/AboutContainer';
+import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
+import { LineHeaderRed } from "../components/LineHeaderRed";
+import { LineTitle } from "../components/LineTitle";
+import { AboutContainer } from '../styles/AboutContainer';
 
-export function About() {
+export default function About() {
   return (
     <>
       <Header />
