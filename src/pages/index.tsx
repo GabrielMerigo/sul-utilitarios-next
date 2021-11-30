@@ -1,5 +1,5 @@
 import { Header } from "../components/Header";
-import Banner from '../../assets/banner-black.png';
+import Banner from '../assets/banner-black.png';
 import { Footer } from "../components/Footer";
 import { Grid } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -11,8 +11,8 @@ import {
   Map
 } from '../styles/Home';
 
-import ArrowRight from '../../assets/arrow-right.png';
-import ArrowLeft from '../../assets/arrow-left.png';
+import ArrowRight from '../assets/arrow-right.png';
+import ArrowLeft from '../assets/arrow-left.png';
 import { api } from "../services/api";
 import { useEffect, useState } from "react";
 import { LineTitle } from "../components/LineTitle";
@@ -27,7 +27,6 @@ export interface VehiclesTypes {
   formattedPrice: number;
   id: number;
 }
-
 
 const vehicles = 'vehicles';
 const url = '/vehicles';
@@ -97,9 +96,9 @@ createServer({
       return schema.create(vehicles, data)
     })
   }
-})
+});
 
-export function Home() {
+export default function Home() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
   const [firstSixVehicles, setFirstSixVehicles] = useState<VehiclesTypes[]>([])
   const [loading, setLoading] = useState(false);
