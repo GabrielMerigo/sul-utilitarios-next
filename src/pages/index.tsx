@@ -10,14 +10,13 @@ import {
   Map,
 } from '../styles/Home';
 
-import ArrowRight from '../assets/arrow-right.png';
-import ArrowLeft from '../assets/arrow-left.png';
 import { api } from "../services/api";
 import { useEffect, useState } from "react";
 import { LineTitle } from "../components/LineTitle";
 import { BoxItem } from "../components/BoxItem";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 
 export interface VehiclesTypes {
   img: string;
@@ -66,20 +65,18 @@ export default function Home() {
             <ImSpinner2 className="loader" />
           </Spinner>
         ) : (
-          <>
-            <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-              {vehicles.slice(0, 6).map(({ img, title, subtitle, formattedPrice }, index) => (
-                <BoxItem
-                  key={index}
-                  img={img}
-                  title={title}
-                  description={subtitle}
-                  formattedPrice={formattedPrice}
-                  isNew={true}
-                />
-              ))}
-            </Grid>
-          </>
+          <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+            {vehicles.slice(0, 6).map(({ img, title, subtitle, formattedPrice }, index) => (
+              <BoxItem
+                key={index}
+                img={img}
+                title={title}
+                description={subtitle}
+                formattedPrice={formattedPrice}
+                isNew={true}
+              />
+            ))}
+          </Grid>
         )}
       </CarList>
 
@@ -102,9 +99,9 @@ export default function Home() {
           <h2>Depoimentos</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus voluptates necessitatibus culpa, ratione deleniti magnam ullam vero consectetur voluptatibus incidunt est quos quidem, aperiam officiis repellendus, labore veniam possimus dolor!</p>
           <div>
-            <span>
-              <Image src={ArrowLeft} alt="ArrowRight" />
-              <Image src={ArrowRight} alt="ArrowRight" />
+            <span style={{ marginTop: '0.7rem'}}>
+              <FaArrowAltCircleLeft fontSize={22} style={{ marginRight: '1rem' }} />
+              <FaArrowAltCircleRight fontSize={22} />
             </span>
             <h3>- João Tavares</h3>
           </div>

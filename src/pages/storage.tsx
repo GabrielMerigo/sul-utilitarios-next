@@ -7,6 +7,8 @@ import { VehiclesTypes } from "./index";
 import { api } from "../services/api";
 import { ImSpinner2 } from "react-icons/im";
 import { LineTitle } from '../components/LineTitle';
+import { Grid } from '@chakra-ui/react';
+import { BoxItem } from "../components/BoxItem";
 
 export default function Storage() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
@@ -15,7 +17,7 @@ export default function Storage() {
   useEffect(() => {
     api.get('/vehicles')
       .then(async response => {
-        const data = response.data.vehicles;
+        const data = response.data;
         setVehicles(data)
         setLoading(false)
       })
@@ -37,12 +39,33 @@ export default function Storage() {
         <>
           <LineTitle title="Carros" />
           <CarList>
-            
+            <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+              {vehicles.map(({ img, title, subtitle, formattedPrice }, index) => (
+                <BoxItem
+                  key={index}
+                  img={img}
+                  title={title}
+                  description={subtitle}
+                  formattedPrice={formattedPrice}
+                />
+              ))}
+            </Grid>
           </CarList>
 
           <LineTitle title="Caminhões" />
           <CarList>
-           
+            <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+              {vehicles.map(({ img, title, subtitle, formattedPrice }, index) => (
+                <BoxItem
+                  key={index}
+                  img={img}
+                  title={title}
+                  
+                  description={subtitle}
+                  formattedPrice={formattedPrice}
+                />
+              ))}
+            </Grid>
           </CarList>
         </>
       )}
