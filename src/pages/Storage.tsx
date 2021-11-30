@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CarList, Spinner } from './styles';
+import { CarList, Spinner } from '../styles/Storage';
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { LineHeaderRed } from "../components/LineHeaderRed";

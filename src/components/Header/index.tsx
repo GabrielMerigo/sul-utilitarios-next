@@ -1,13 +1,13 @@
 import { HeaderContainer } from './styles';
 import Logo from '../../assets/logo-loja.png';
 import { Link, useLocation } from 'react-router-dom';
+import Image from 'next/image';
 
 export function Header() {
   const { pathname } = useLocation();
-  console.log(pathname === '/contact')
   return (
     <HeaderContainer>
-      <img src={Logo} alt="Logo Sul Utilitarios" />
+      <Image src={Logo} alt="Logo Sul Utilitarios" />
       <nav>
         <ul>
           <Link to="/"><span style={{ color: `${pathname === '/' ? 'red' : '#333333'}`}}>Principal</span></Link>

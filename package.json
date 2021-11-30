@@ -8,12 +8,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@types/react-router-dom": "^5.3.2",
     "@types/styled-components": "^5.1.15",
     "axios": "^0.24.0",
+    "framer-motion": "^5.3.3",
+    "miragejs": "^0.1.42",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
+    "react-router-dom": "^6.0.2",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
