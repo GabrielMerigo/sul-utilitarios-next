@@ -40,13 +40,14 @@ export default function Storage() {
           <LineTitle title="Carros" />
           <CarList>
             <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-              {vehicles.map(({ img, title, subtitle, formattedPrice }, index) => (
+              {vehicles.map(({ img, title, subtitle, formattedPrice, id }, index) => (
                 <BoxItem
                   key={index}
                   img={img}
                   title={title}
                   description={subtitle}
                   formattedPrice={formattedPrice}
+                  id={id}
                 />
               ))}
             </Grid>
@@ -55,14 +56,14 @@ export default function Storage() {
           <LineTitle title="Caminhões" />
           <CarList>
             <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-              {vehicles.map(({ img, title, subtitle, formattedPrice }, index) => (
+              {vehicles.map(({ img, title, subtitle, formattedPrice, id }, index) => (
                 <BoxItem
                   key={index}
                   img={img}
                   title={title}
-                  
                   description={subtitle}
                   formattedPrice={formattedPrice}
+                  id={id}
                 />
               ))}
             </Grid>

@@ -126,15 +126,13 @@ export const Description = styled.div`
       span{
         display: flex;
       }
-      
-      img{
-        & + img{
-          margin-left: .5rem;
-        }
-        transition: all 200ms;
-      }
 
-      img:hover{
+      svg{
+        color: #B21E1E;
+      }
+    
+      svg:hover{
+        transition: 1s ease-in-out;
         filter: brightness(0.8);
         cursor: pointer;
       }

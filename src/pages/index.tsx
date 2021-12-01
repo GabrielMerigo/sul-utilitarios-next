@@ -46,7 +46,6 @@ export default function Home() {
       })
   }, [])
 
-
   return (
     <>
       <Header />
@@ -66,9 +65,10 @@ export default function Home() {
           </Spinner>
         ) : (
           <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-            {vehicles.slice(0, 6).map(({ img, title, subtitle, formattedPrice }, index) => (
+            {vehicles.slice(0, 6).map(({ img, title, subtitle, formattedPrice, id }) => (
               <BoxItem
-                key={index}
+                key={id}
+                id={id}
                 img={img}
                 title={title}
                 description={subtitle}

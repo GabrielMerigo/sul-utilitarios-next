@@ -24,11 +24,6 @@ export const HeaderContainer = styled.header`
       text-decoration: none;
       color: var(--gray-black);
       
-      span:hover{
-        transition: color 0.3s;
-        color: red;
-        cursor: pointer;
-      }
     }
   }
 `;
