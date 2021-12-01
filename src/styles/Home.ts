@@ -48,6 +48,40 @@ export const CarList = styled.div`
   }
 `;
 
+export const WrapperBanner = styled.div`
+  display: flex;
+  margin-top: 1rem;
+
+  h1{
+    font-size: 2rem;
+  }
+
+  .img{
+    margin-left: 21.5rem;
+  }
+
+  div{
+    position: absolute;
+    width: 370px;
+    height: 450px;
+    z-index: 999;
+    background: #333333;
+    display: block;
+    margin-right: 2rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
+    h1{
+      width: 400px;
+      color: white;
+      font-size: 3.5rem;
+      margin-left: 10rem;
+      position: absolute;
+      font-family: 'Lato', sans-serif;
+    }
+  }
+`;
+
 export const Description = styled.div`
   display: flex;
   width: 100%;

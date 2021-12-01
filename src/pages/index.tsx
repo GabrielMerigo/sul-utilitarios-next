@@ -1,5 +1,5 @@
 import { Header } from "../components/Header";
-import Banner from '../assets/banner-black.png';
+import Banner from '../assets/air-landing-hero.png';
 import { Footer } from "../components/Footer";
 import { Grid } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import {
   Description,
   Local,
   Map,
+  WrapperBanner
 } from '../styles/Home';
 
 import { api } from "../services/api";
@@ -17,6 +18,7 @@ import { BoxItem } from "../components/BoxItem";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
+import { db, collection, getDocs } from "../services/firebase";
 
 export interface VehiclesTypes {
   img: string;
@@ -30,8 +32,22 @@ export default function Home() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
   const [loading, setLoading] = useState(false);
 
+  async function getVehicles(db) {
+    const vehiclesCol = collection(db, 'vehicles');
+    const vehicleSnapshot = await getDocs(vehiclesCol);
+    console.log(vehicleSnapshot.docs);
+    const vehicleList = vehicleSnapshot.docs.map(doc => doc.data());
+    return vehicleList;
+  }
+  
+
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
+    getVehicles(db).then(res => {
+      console.log(res)
+    })
+
+
     api.get('vehicles')
       .then(async response => {
         console.log(response.data)
@@ -49,13 +65,20 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Image
-        src={Banner}
-        alt="Banner"
-        placeholder="blur"
-        width={1400}
-        height={450}
-      />
+      <WrapperBanner>
+        <div>
+          <h1>O melhor do comércio automotivo é na <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
+        </div>
+        <span className="img">
+          <Image
+            src={Banner}
+            alt="Banner"
+            placeholder="blur"
+            width={1000}
+            height={450}
+          />
+        </span>
+      </WrapperBanner>
       <LineTitle title="Adicionados Recentemente" />
 
       <CarList>
@@ -99,7 +122,7 @@ export default function Home() {
           <h2>Depoimentos</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus voluptates necessitatibus culpa, ratione deleniti magnam ullam vero consectetur voluptatibus incidunt est quos quidem, aperiam officiis repellendus, labore veniam possimus dolor!</p>
           <div>
-            <span style={{ marginTop: '0.7rem'}}>
+            <span style={{ marginTop: '0.7rem' }}>
               <FaArrowAltCircleLeft fontSize={22} style={{ marginRight: '1rem' }} />
               <FaArrowAltCircleRight fontSize={22} />
             </span>
