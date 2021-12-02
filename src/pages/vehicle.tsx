@@ -8,11 +8,50 @@ import { LineHeaderRed } from "../components/LineHeaderRed";
 import Slider from "react-slick";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
-import { db, collection, getDocs } from "../services/firebase";
+import { db, getDoc, doc } from "../services/firebase";
+import { useCallback, useEffect, useState, useMemo } from "react";
+import { ImSpinner2 } from "react-icons/im";
+import { Spinner } from "../styles/Storage";
+
+interface Vehicle {
+  createdAt: string;
+  img: string;
+  priceFormatted: string;
+  subtitle: string;
+  title: string;
+  id: string;
+}
 
 export default function Vehicle() {
-  const { id } = useRouter().query;
-  console.log(collection(db,'vehicles'))
+  const router = useRouter();
+  const id: string = useMemo(() => router.query.id as string, [router.query]);
+  const [vehicle, setVehicle] = useState<Vehicle | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+
+  const getVehicle = useCallback(async () => {
+    if (id) {
+      setLoading(true)
+      const docRef = doc(db, 'vehicles', id);
+      await getDoc(docRef)
+        .then((docSnap) => {
+          setVehicle({
+            createdAt: docSnap.data().createdAt,
+            img: docSnap.data().img,
+            priceFormatted: docSnap.data().priceFormatted,
+            subtitle: docSnap.data().subtitle,
+            title: docSnap.data().title,
+            id
+          });
+        })
+        .catch(err => console.log)
+        .finally(() => setLoading(false))
+    }
+  }, [id])
+
+  useEffect(() => {
+    getVehicle();
+  }, [getVehicle])
+
 
   function SamplePrevArrow(props: any) {
     const { className, style, onClick } = props;
@@ -46,41 +85,45 @@ export default function Vehicle() {
     prevArrow: <SamplePrevArrow />
   };
 
+  const formattedPrice = Number(vehicle?.priceFormatted).toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+
   return (
     <WrapperInfo>
       <Header />
       <LineHeaderRed />
-      <LineTitle title="Ecosport 2005 XLS" />
-      <InfoVehicle>
-        <Slider {...settings}>
-          <div>
-            <div style={{ border: '1px solid black' }}>
-              <Image height={450} width={850} src={Carro} alt="carro" />
-            </div>
-          </div>
-          <div>
-            <div style={{ border: '1px solid black' }}>
-              <Image height={450} width={850} src={Carro} alt="carro" />
-            </div>
-          </div>
-          <div>
-            <div style={{ border: '1px solid black' }}>
-              <Image height={450} width={850} src={Carro} alt="carro" />
-            </div>
-          </div>
-          <div>
-            <div style={{ border: '1px solid black' }}>
-              <Image height={450} width={850} src={Carro} alt="carro" />
-            </div>
-          </div>
-        </Slider>
-      </InfoVehicle>
+      {loading ? (
+        <Spinner>
+          <ImSpinner2 className="loader" />
+        </Spinner>
+      ) : (
+        <>
+          <LineTitle title={vehicle?.title} />
+          <InfoVehicle>
+            <Slider {...settings}>
+              <div>
+                <div style={{ border: '1px solid black' }}>
+                  <img style={{ height: '450px', width: '100%' }} src={vehicle?.img} alt={vehicle?.title} />
+                </div>
+              </div>
+              <div>
+                <div style={{ border: '1px solid black' }}>
+                  <img style={{ height: '450px', width: '100%' }} src={vehicle?.img} alt={vehicle?.title} />
+                </div><script></script>
+              </div>
+            </Slider>
+          </InfoVehicle>
 
-      <DescriptionVehicle>
-        <h2>R$26.000,00</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        <button><a href="">Entre em Contato</a></button>
-      </DescriptionVehicle>
+          <DescriptionVehicle>
+            <h2>{formattedPrice}</h2>
+            <p>{vehicle?.subtitle}</p>
+            <button><a href="">Entre em Contato</a></button>
+          </DescriptionVehicle>
+        </>
+      )}
+
       <Footer marginTop="2" position="static" direction="10" />
     </WrapperInfo>
   )
