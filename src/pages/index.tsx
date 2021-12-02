@@ -20,17 +20,17 @@ import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { db, collection, getDocs } from "../services/firebase";
 
 export interface VehiclesTypes {
-  img: string;
+  mainImage: string;
+  childImages: String[];
   title: string;
   subtitle: string;
-  formattedPrice: number;
+  priceFormatted: number;
   id: string;
 }
 
 export default function Home() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
   const [loading, setLoading] = useState(false);
-
 
   async function getVehicles(db) {
     const vehiclesCol = collection(db, 'vehicles');
@@ -65,7 +65,6 @@ export default function Home() {
           <Image
             src={Banner}
             alt="Banner"
-            placeholder="blur"
             width={1000}
             height={450}
           />
@@ -80,14 +79,14 @@ export default function Home() {
           </Spinner>
         ) : (
           <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-            {vehicles.slice(0, 6).map(({ img, title, subtitle, formattedPrice, id }) => (
+            {vehicles.slice(0, 6).map(({ mainImage, title, subtitle, priceFormatted, id }) => (
               <BoxItem
                 key={id}
                 id={id}
-                img={img}
+                mainImage={mainImage}
                 title={title}
                 description={subtitle}
-                formattedPrice={formattedPrice}
+                priceFormatted={priceFormatted}
                 isNew={true}
               />
             ))}

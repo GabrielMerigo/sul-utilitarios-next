@@ -1,27 +1,32 @@
 
 import { Box, Badge, Image } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 interface BoxItemProps {
-  img: string;
+  mainImage: string;
   title: string;
   description: string;
-  formattedPrice: number;
+  priceFormatted: number;
   isNew?: boolean;
   id: number | string
 }
 
-export function BoxItem({ img, title, description, formattedPrice, isNew, id }: BoxItemProps) {
+export function BoxItem({ mainImage, title, description, priceFormatted, isNew, id }: BoxItemProps) {
+
+  const formattedPrice = Number(priceFormatted).toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+
   return (
     <Link href={`vehicle?id=${id}`} passHref>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Image height="15rem" width="30rem" src={img} alt={description} />
+        <Image height="15rem" width="30rem" src={mainImage} alt={description} />
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">
             {isNew && (
-              <Badge borderRadius="full" px="2" colorScheme="teal">
+              <Badge style={{ marginLeft: '-5px' }} borderRadius="full" px="2" colorScheme="teal">
                 Novo
               </Badge>
             )}
@@ -38,6 +43,10 @@ export function BoxItem({ img, title, description, formattedPrice, isNew, id }: 
             </Box>
           </Box>
 
+          <Box style={{ marginTop: '3px' }}>
+            R$ {formattedPrice}
+          </Box>
+
           <Box
             mt="1"
             fontWeight="semibold"
@@ -46,9 +55,6 @@ export function BoxItem({ img, title, description, formattedPrice, isNew, id }: 
             isTruncated
           >
             {description}
-          </Box>
-          <Box>
-            {formattedPrice}
           </Box>
         </Box>
       </Box>

@@ -15,7 +15,8 @@ import { Spinner } from "../styles/Storage";
 
 interface Vehicle {
   createdAt: string;
-  img: string;
+  mainImage: string;
+  childImages: string[];
   priceFormatted: string;
   subtitle: string;
   title: string;
@@ -36,7 +37,8 @@ export default function Vehicle() {
         .then((docSnap) => {
           setVehicle({
             createdAt: docSnap.data().createdAt,
-            img: docSnap.data().img,
+            mainImage: docSnap.data().mainImage,
+            childImages: docSnap.data().childImages,
             priceFormatted: docSnap.data().priceFormatted,
             subtitle: docSnap.data().subtitle,
             title: docSnap.data().title,
@@ -103,21 +105,18 @@ export default function Vehicle() {
           <LineTitle title={vehicle?.title} />
           <InfoVehicle>
             <Slider {...settings}>
-              <div>
-                <div style={{ border: '1px solid black' }}>
-                  <img style={{ height: '450px', width: '100%' }} src={vehicle?.img} alt={vehicle?.title} />
+              {vehicle?.childImages.map((img, index) => (
+                <div key={index}>
+                  <div style={{ border: '1px solid black' }}>
+                    <img style={{ height: '450px', width: '100%' }} src={img} alt={vehicle?.title} />
+                  </div>
                 </div>
-              </div>
-              <div>
-                <div style={{ border: '1px solid black' }}>
-                  <img style={{ height: '450px', width: '100%' }} src={vehicle?.img} alt={vehicle?.title} />
-                </div><script></script>
-              </div>
+              ))}
             </Slider>
           </InfoVehicle>
 
           <DescriptionVehicle>
-            <h2>{formattedPrice}</h2>
+            <h2>R$ {formattedPrice}</h2>
             <p>{vehicle?.subtitle}</p>
             <button><a href="">Entre em Contato</a></button>
           </DescriptionVehicle>

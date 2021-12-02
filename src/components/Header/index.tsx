@@ -9,7 +9,9 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <Image src={Logo} alt="Logo Sul Utilitarios" />
+      <Link href="/" passHref>
+        <Image src={Logo} alt="Logo Sul Utilitarios" />
+      </Link>
       <nav>
         <ul>
           <Link href="/"><a style={{ color: `${pathname === '/' ? 'red' : '#333333'}` }}>Principal</a></Link>
