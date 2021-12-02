@@ -13,18 +13,8 @@ interface BoxItemProps {
 }
 
 export function BoxItem({ img, title, description, formattedPrice, isNew, id }: BoxItemProps) {
-  const router = useRouter();
-  console.log(useRouter().query.id)
-
   return (
-    <div onClick={() => {
-      router.push({
-        pathname: '/vehicles/vehicle',
-        query: {
-          id
-        }
-      })
-    }}>
+    <Link href={`vehicle?id=${id}`} passHref>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
         <Image height="15rem" width="30rem" src={img} alt={description} />
 
@@ -62,7 +52,7 @@ export function BoxItem({ img, title, description, formattedPrice, isNew, id }: 
           </Box>
         </Box>
       </Box>
-    </div>
+    </Link>
   )
 
 }

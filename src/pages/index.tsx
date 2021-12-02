@@ -11,7 +11,6 @@ import {
   WrapperBanner
 } from '../styles/Home';
 
-import { api } from "../services/api";
 import { useEffect, useState } from "react";
 import { LineTitle } from "../components/LineTitle";
 import { BoxItem } from "../components/BoxItem";
