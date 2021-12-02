@@ -25,41 +25,34 @@ export interface VehiclesTypes {
   title: string;
   subtitle: string;
   formattedPrice: number;
-  id: number;
+  id: string;
 }
 
 export default function Home() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
   const [loading, setLoading] = useState(false);
 
+
   async function getVehicles(db) {
     const vehiclesCol = collection(db, 'vehicles');
     const vehicleSnapshot = await getDocs(vehiclesCol);
-    console.log(vehicleSnapshot.docs);
-    const vehicleList = vehicleSnapshot.docs.map(doc => doc.data());
-    return vehicleList;
+    const vehicleList = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>;
+    return vehicleList
   }
-  
 
   useEffect(() => {
     setLoading(true);
-    getVehicles(db).then(res => {
+
+    getVehicles(db).then((res) => {
+      setVehicles(res)
       console.log(res)
     })
-
-
-    api.get('vehicles')
-      .then(async response => {
-        console.log(response.data)
-        const data = response.data;
-        setVehicles(data);
-      })
-      .catch(() => {
-        console.log('erro ao carregamento de dados.');
-      })
-      .finally(() => {
-        setLoading(false);
-      })
+    .catch(res => {
+      console.info('Não foi possível carregar os dados');
+    })
+    .finally(() => {
+      setLoading(false);
+    })
   }, [])
 
   return (

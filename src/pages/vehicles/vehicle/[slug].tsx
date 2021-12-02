@@ -1,12 +1,13 @@
-import { Header } from "../../components/Header"
-import { Footer } from "../../components/Footer"
+import { Header } from "../../../components/Header"
+import { Footer } from "../../../components/Footer"
 import Carro from '../../assets/carro-do-pai.jpg'
-import { InfoVehicle, DescriptionVehicle, WrapperInfo } from '../../styles/Vehicle';
+import { InfoVehicle, DescriptionVehicle, WrapperInfo } from '../../../styles/Vehicle';
 import Image from 'next/image';
-import { LineTitle } from "../../components/LineTitle";
-import { LineHeaderRed } from "../../components/LineHeaderRed";
+import { LineTitle } from "../../../components/LineTitle";
+import { LineHeaderRed } from "../../../components/LineHeaderRed";
 import Slider from "react-slick";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { useRouter } from 'next/router'
 
 export default function Vehicle() {
   function SamplePrevArrow(props) {

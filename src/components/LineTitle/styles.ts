@@ -5,7 +5,6 @@ export const LineTitleContainer = styled.div`
 	margin: 5px auto;
 	position: relative;
 	text-align: center;
-  margin-top: 3rem;
 
   div {
     margin-top: 1.4rem;

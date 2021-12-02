@@ -1,6 +1,7 @@
 
 import { Box, Badge, Image } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface BoxItemProps {
   img: string;
@@ -12,10 +13,18 @@ interface BoxItemProps {
 }
 
 export function BoxItem({ img, title, description, formattedPrice, isNew, id }: BoxItemProps) {
-  const path = `/vehicles/${id}`
+  const router = useRouter();
+  console.log(useRouter().query.id)
 
   return (
-    <Link href={path} passHref>
+    <div onClick={() => {
+      router.push({
+        pathname: '/vehicles/vehicle',
+        query: {
+          id
+        }
+      })
+    }}>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
         <Image height="15rem" width="30rem" src={img} alt={description} />
 
@@ -53,7 +62,7 @@ export function BoxItem({ img, title, description, formattedPrice, isNew, id }: 
           </Box>
         </Box>
       </Box>
-    </Link>
+    </div>
   )
 
 }
