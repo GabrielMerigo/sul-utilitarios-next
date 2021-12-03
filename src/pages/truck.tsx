@@ -32,7 +32,7 @@ export default function Vehicle() {
   const getVehicle = useCallback(async () => {
     if (id) {
       setLoading(true)
-      const docRef = doc(db, 'vehicles', id);
+      const docRef = doc(db, 'trucks', id);
       await getDoc(docRef)
         .then((docSnap) => {
           setVehicle({

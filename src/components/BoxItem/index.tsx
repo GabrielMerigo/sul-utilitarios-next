@@ -2,16 +2,17 @@
 import { Box, Badge, Image } from '@chakra-ui/react';
 import Link from 'next/link';
 
-interface BoxItemProps {
+export interface BoxItemProps {
   mainImage: string;
   title: string;
   description: string;
   priceFormatted: number;
   isNew?: boolean;
   id: number | string
+  isVehicle: boolean;
 }
 
-export function BoxItem({ mainImage, title, description, priceFormatted, isNew, id }: BoxItemProps) {
+export function BoxItem({ mainImage, title, description, priceFormatted, isNew, id, isVehicle }: BoxItemProps) {
 
   const formattedPrice = Number(priceFormatted).toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
@@ -19,25 +20,25 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
   })
 
   return (
-    <Link href={`vehicle?id=${id}`} passHref>
+    <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
         <Image height="15rem" width="30rem" src={mainImage} alt={description} />
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">
             {isNew && (
-              <Badge style={{ marginLeft: '-5px' }} borderRadius="full" px="2" colorScheme="teal">
+              <Badge style={{ marginLeft: '-5px', marginRight: '5px' }} borderRadius="full" px="2" colorScheme="teal">
                 Novo
               </Badge>
             )}
 
             <Box
-              color="gray.500"
               fontWeight="semibold"
+              as="h4"
               letterSpacing="wide"
-              fontSize="xs"
               textTransform="uppercase"
               ml="2"
+              style={{ fontSize: '1rem', margin: 0 }}
             >
               {title}
             </Box>
@@ -48,6 +49,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
           </Box>
 
           <Box
+            color="gray.500"
             mt="1"
             fontWeight="semibold"
             as="h4"

@@ -1,29 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CarList, Spinner } from '../styles/Storage';
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { LineHeaderRed } from "../components/LineHeaderRed";
 import { VehiclesTypes } from "./index";
-import { api } from "../services/api";
 import { ImSpinner2 } from "react-icons/im";
 import { LineTitle } from '../components/LineTitle';
 import { Grid } from '@chakra-ui/react';
 import { BoxItem } from "../components/BoxItem";
+import { db, collection, getDocs } from "../services/firebase";
 
 export default function Storage() {
   const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [trucks, setTrucks] = useState<VehiclesTypes[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  async function getVehicles(db) {
+    const vehiclesCol = collection(db, 'vehicles');
+    const vehicleSnapshot = await getDocs(vehiclesCol);
+    const vehicleList = vehicleSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })) as Array<VehiclesTypes>;
+    return vehicleList
+  }
+
+  async function getTrucks(db) {
+    const trucksCol = collection(db, 'trucks');
+    const trucksSnapshot = await getDocs(trucksCol);
+    const trucksList = trucksSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })) as Array<VehiclesTypes>;
+    return trucksList
+  }
+
+  async function getCars() {
+    try {
+      setLoading(true);
+      const resVehicles = await getVehicles(db);
+      const resTrucks = await getTrucks(db);
+      setVehicles(resVehicles);
+      setTrucks(resTrucks);
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
 
   useEffect(() => {
-    api.get('/vehicles')
-      .then(async response => {
-        const data = response.data;
-        setVehicles(data)
-        setLoading(false)
-      })
-      .catch(() => {
-        setLoading(false)
-      })
+    getCars();
   }, [])
 
   return (
@@ -40,14 +63,15 @@ export default function Storage() {
           <LineTitle title="Carros" />
           <CarList>
             <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-              {vehicles.map(({ img, title, subtitle, formattedPrice, id }, index) => (
+              {vehicles.map(({ mainImage, title, description, priceFormatted, id }, index) => (
                 <BoxItem
                   key={index}
-                  img={img}
+                  mainImage={mainImage}
                   title={title}
-                  description={subtitle}
-                  formattedPrice={formattedPrice}
+                  description={description}
+                  priceFormatted={priceFormatted}
                   id={id}
+                  isVehicle={true}
                 />
               ))}
             </Grid>
@@ -56,13 +80,14 @@ export default function Storage() {
           <LineTitle title="Caminhões" />
           <CarList>
             <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-              {vehicles.map(({ img, title, subtitle, formattedPrice, id }, index) => (
+              {trucks.map(({ mainImage, title, description, priceFormatted, id }, index) => (
                 <BoxItem
+                  isVehicle={false}
                   key={index}
-                  img={img}
+                  mainImage={mainImage}
                   title={title}
-                  description={subtitle}
-                  formattedPrice={formattedPrice}
+                  description={description}
+                  priceFormatted={priceFormatted}
                   id={id}
                 />
               ))}

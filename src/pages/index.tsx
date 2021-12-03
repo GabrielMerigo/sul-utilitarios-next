@@ -20,10 +20,11 @@ import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { db, collection, getDocs } from "../services/firebase";
 
 export interface VehiclesTypes {
+  createdAt: string;
   mainImage: string;
   childImages: String[];
   title: string;
-  subtitle: string;
+  description: string;
   priceFormatted: number;
   id: string;
 }
@@ -79,15 +80,16 @@ export default function Home() {
           </Spinner>
         ) : (
           <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-            {vehicles.slice(0, 6).map(({ mainImage, title, subtitle, priceFormatted, id }) => (
+            {vehicles.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
               <BoxItem
                 key={id}
                 id={id}
                 mainImage={mainImage}
                 title={title}
-                description={subtitle}
+                description={description}
                 priceFormatted={priceFormatted}
                 isNew={true}
+                isVehicle={true}
               />
             ))}
           </Grid>

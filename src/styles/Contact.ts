@@ -27,11 +27,11 @@ export const LineTitle = styled.div`
 `;
 
 export const ContainerButton = styled.div`
-	margin: 0 auto;
+	margin: 6em auto;
   width: 100%;
   display: flex;
   justify-content:center;
-  margin-top:4.5rem;
+
   button{
     padding: 2rem;
     width: 25%;
