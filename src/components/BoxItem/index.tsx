@@ -1,16 +1,8 @@
 
 import { Box, Badge, Image } from '@chakra-ui/react';
 import Link from 'next/link';
+import { BoxItemProps } from './BoxItem';
 
-export interface BoxItemProps {
-  mainImage: string;
-  title: string;
-  description: string;
-  priceFormatted: number;
-  isNew?: boolean;
-  id: number | string
-  isVehicle: boolean;
-}
 
 export function BoxItem({ mainImage, title, description, priceFormatted, isNew, id, isVehicle }: BoxItemProps) {
   console.log(mainImage)
@@ -23,7 +15,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
   return (
     <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Image height="15rem" width="30rem" src={mainImage} alt={description} />
+        <Image height="15rem" width="30rem" src={mainImage.url} alt={description} />
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">

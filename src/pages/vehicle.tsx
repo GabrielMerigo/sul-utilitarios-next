@@ -13,10 +13,21 @@ import { useCallback, useEffect, useState, useMemo } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
 
+interface ChildImages {
+  error: boolean
+  id: string
+  name: string
+  preview: string
+  progress: number
+  readableSize: string
+  uploaded: boolean
+  url: string
+}
+
 interface Vehicle {
   createdAt: string;
   mainImage: string;
-  childImages: string[];
+  childImages: ChildImages[];
   priceFormatted: string;
   description: string;
   title: string;
@@ -91,7 +102,7 @@ export default function Vehicle() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })
-
+  
   return (
     <WrapperInfo>
       <Header />
@@ -108,7 +119,7 @@ export default function Vehicle() {
               {vehicle?.childImages.map((img, index) => (
                 <div key={index}>
                   <div style={{ border: '1px solid black' }}>
-                    <img style={{ height: '450px', width: '100%' }} src={img} alt={vehicle?.title} />
+                    <img style={{ height: '450px', width: '100%' }} src={img.url} alt={vehicle?.title} />
                   </div>
                 </div>
               ))}

@@ -18,10 +18,11 @@ import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { db, collection, getDocs } from "../services/firebase";
+import { MainImage } from "../components/BoxItem/BoxItem";
 
 export interface VehiclesTypes {
   createdAt: string;
-  mainImage: string;
+  mainImage: MainImage;
   childImages: String[];
   title: string;
   description: string;
