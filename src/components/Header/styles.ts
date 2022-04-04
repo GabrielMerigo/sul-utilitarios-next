@@ -26,4 +26,22 @@ export const HeaderContainer = styled.header`
       
     }
   }
+
+  @media(max-width: 900px) {
+
+    span{
+      background-color:red;
+    }
+
+    ul{
+      flex-direction: column;
+      margin-right: 10rem;
+    }
+
+    img{
+      visibility: hidden;
+    } 
+  }
+  
+
 `;

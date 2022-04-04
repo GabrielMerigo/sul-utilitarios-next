@@ -51,6 +51,7 @@ export const CarList = styled.div`
 export const WrapperBanner = styled.div`
   display: flex;
   margin-top: 1rem;
+  flex-direction: column;
 
   h1{
     font-size: 2rem;
@@ -78,6 +79,29 @@ export const WrapperBanner = styled.div`
       margin-left: 10rem;
       position: absolute;
       font-family: 'Lato', sans-serif;
+    }
+  }
+
+  @media(max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+
+    .img{
+      margin-left: -60px;
+    }
+
+    div{
+      width: 100%;
+      height: 280px;
+      position: relative;
+
+      h1{
+        width: 280px;
+        height: 250px;
+        font-size: 3rem;
+        margin-top: 3rem;
+        margin-left: 2rem;
+      }
     }
   }
 `;
