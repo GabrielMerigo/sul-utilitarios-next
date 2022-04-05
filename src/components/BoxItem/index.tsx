@@ -32,6 +32,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
               textTransform="uppercase"
               ml="2"
               style={{ fontSize: '1rem', margin: 0 }}
+              width={{ base: '100%', sm: '50%', md: '25%' }}
             >
               {title}
             </Box>

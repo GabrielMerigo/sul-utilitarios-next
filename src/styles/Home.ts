@@ -4,47 +4,10 @@ export const CarList = styled.div`
   max-width: 900px;
   margin:0 auto;
 
-  ul{
-    display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-    margin: 0 auto;
 
-    li {
-      margin:0.5rem;
-      width:31.5%;
-      background: var(--gray-light);
-      border-radius: 0.5rem;
-      margin-top: 2rem;
-      transition: all 400ms;
-
-      div {
-        background: var(--gray-dark);
-        height: 40%;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius:10px;
-        padding-left: 0.7rem;
-
-        svg{
-          margin-right:0.2rem;
-          color: #fa5d41;
-        }
-
-        h4, p{
-          color: #ccc;
-        }
-      }
-    }
-
-    li:hover{
-      filter: brightness(0.8);
-      cursor: pointer;
-      box-shadow: 6px 2px 21px 5px rgba(0,0,0,0.46);
-    }
-    
-    img{
-      width:90%;
-    }
+ 
+  @media(max-width: 850px) {
+   
   }
 `;
 

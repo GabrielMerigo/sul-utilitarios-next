@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import Banner from '../assets/air-landing-hero.png';
 import { Footer } from "../components/Footer";
-import { Grid } from '@chakra-ui/react';
+import { Grid, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
 import {
   CarList,
@@ -80,7 +80,7 @@ export default function Home() {
             <ImSpinner2 className="loader" />
           </Spinner>
         ) : (
-          <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+          <Stack direction={['column', 'row']} spacing="24px">
             {vehicles.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
               <BoxItem
                 key={id}
@@ -93,7 +93,7 @@ export default function Home() {
                 isVehicle={true}
               />
             ))}
-          </Grid>
+          </Stack>
         )}
       </CarList>
 
