@@ -6,7 +6,7 @@ import { LineHeaderRed } from "../components/LineHeaderRed";
 import { VehiclesTypes } from "./index";
 import { ImSpinner2 } from "react-icons/im";
 import { LineTitle } from '../components/LineTitle';
-import { Alert, AlertIcon, Grid } from '@chakra-ui/react';
+import { Alert, AlertIcon, Grid, Stack } from '@chakra-ui/react';
 import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
 
@@ -37,8 +37,6 @@ export default function Storage() {
     }
   }
 
-
-
   useEffect(() => {
     getCars();
   }, [])
@@ -56,7 +54,7 @@ export default function Storage() {
         <>
           <LineTitle title="Carros" />
           <CarList>
-            <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+          <Stack direction={['column', 'row']} spacing="24px">
               {vehicles.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
                 <BoxItem
                   key={index}
@@ -68,7 +66,7 @@ export default function Storage() {
                   isVehicle={true}
                 />
               ))}
-            </Grid>
+            </Stack>
             {!vehicles.length && (
               <Alert status='warning'>
                 <AlertIcon />

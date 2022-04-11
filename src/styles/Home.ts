@@ -4,10 +4,14 @@ export const CarList = styled.div`
   max-width: 900px;
   margin:0 auto;
 
-
- 
-  @media(max-width: 850px) {
-   
+  @media(max-width: 900px) {
+    div{
+      margin: 0.5rem;
+    }
+    
+    img{
+      width: 100%;
+    }
   }
 `;
 
@@ -155,27 +159,16 @@ export const Description = styled.div`
 
     div{
       display: flex;
-      justify-content:space-between;
+      justify-content: flex-end;
       margin-top:1rem;
-      
-      span{
-        display: flex;
-      }
-
-      svg{
-        color: #B21E1E;
-      }
-    
-      svg:hover{
-        transition: 1s ease-in-out;
-        filter: brightness(0.8);
-        cursor: pointer;
-      }
     }
 
     @media(max-width: 900px) {
       div{
         flex-direction: column-reverse;
+        h3{
+          font-size: 1.5rem;
+        }
       }
     }
   }
@@ -224,6 +217,12 @@ export const Map = styled.section`
     margin: 1.5rem auto;
     height: 432px;
     width: 47.5rem;
+
+    @media(max-width: 900px) {
+      margin: 1.5rem auto;
+      width: 30rem;
+      height: 380px;
+    }
   }
 `;
 
@@ -233,7 +232,6 @@ export const CardBoard = styled.div`
   top: 1rem;
   display: flex;
   flex-direction: column;
-  /* background-color: red; */
 
   .single {
     margin-top: 20px;

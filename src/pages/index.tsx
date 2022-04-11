@@ -116,11 +116,7 @@ export default function Home() {
           <h2>Depoimentos</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus voluptates necessitatibus culpa, ratione deleniti magnam ullam vero consectetur voluptatibus incidunt est quos quidem, aperiam officiis repellendus, labore veniam possimus dolor!</p>
           <div>
-            <span style={{ marginTop: '0.7rem' }}>
-              <FaArrowAltCircleLeft fontSize={22} style={{ marginRight: '1rem' }} />
-              <FaArrowAltCircleRight fontSize={22} />
-            </span>
-            <h3>- João Tavares</h3>
+            <h3>- Everson Merigo</h3>
           </div>
         </div>
       </Description>

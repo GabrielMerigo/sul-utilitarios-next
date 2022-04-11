@@ -5,8 +5,6 @@ import { BoxItemProps } from './BoxItem';
 
 
 export function BoxItem({ mainImage, title, description, priceFormatted, isNew, id, isVehicle }: BoxItemProps) {
-  console.log(mainImage)
-
   const formattedPrice = Number(priceFormatted).toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
