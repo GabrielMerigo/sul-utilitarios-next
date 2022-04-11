@@ -74,7 +74,6 @@ export const Description = styled.div`
   width: 100%;
   margin-top: 2rem;
   
-
   div:nth-child(1){
     width: 50%;
     background: var(--gray-dark);
@@ -111,6 +110,21 @@ export const Description = styled.div`
 
       &:hover{
         filter: brightness(0.9);
+      }
+    }
+
+    @media(max-width: 900px) {
+      flex-direction: column;
+
+      div{
+        margin-left: 3rem;
+        ul li{
+          margin-top: 10px;
+        }
+      }
+
+      button{
+        margin-left: 1rem;
       }
     }
   }
@@ -156,6 +170,12 @@ export const Description = styled.div`
         transition: 1s ease-in-out;
         filter: brightness(0.8);
         cursor: pointer;
+      }
+    }
+
+    @media(max-width: 900px) {
+      div{
+        flex-direction: column-reverse;
       }
     }
   }
