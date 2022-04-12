@@ -5,7 +5,7 @@ export const CarList = styled.div`
   margin:0 auto;
 
   @media(max-width: 900px) {
-    div{
+    & > div{
       margin: 0.5rem;
     }
     
@@ -128,7 +128,7 @@ export const Description = styled.div`
       }
 
       button{
-        margin-left: 1rem;
+        margin: 0 3rem;
       }
     }
   }

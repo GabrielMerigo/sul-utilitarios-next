@@ -17,6 +17,13 @@ export const InfoVehicle = styled.div`
     filter: brightness(0.8);
     transition: all 400ms;
   }
+
+    
+  @media(max-width: 900px) {
+    & > div{
+      margin: 1.5rem;
+    }
+  }
 `;
 
 export const DescriptionVehicle = styled.div`
