@@ -4,7 +4,17 @@ export const CarList = styled.div`
   max-width: 900px;
   margin:0 auto;
 
+  & > .boxCars{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+
   @media(max-width: 900px) {
+    & > .boxCars{
+      grid-template-columns: 1fr;
+    }
+
     & > div{
       margin: 0.5rem;
     }

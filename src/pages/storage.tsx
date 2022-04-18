@@ -22,7 +22,7 @@ export default function Storage() {
     return vehicleList
   }
 
-  async function getCars() {
+  async function renderVehicles() {
     try {
       setLoading(true);
       const resVehicles = await getVehicles(db);
@@ -38,7 +38,7 @@ export default function Storage() {
   }
 
   useEffect(() => {
-    getCars();
+    renderVehicles();
   }, [])
 
   return (
