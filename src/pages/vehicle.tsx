@@ -32,6 +32,12 @@ interface Vehicle {
   description: string;
   title: string;
   id: string;
+  brand: string;
+  modelCar: string;
+  traction: string;
+  bodywork: string;
+  yearModel: string;
+  yearFabrication: string;
 }
 
 export default function Vehicle() {
@@ -53,7 +59,13 @@ export default function Vehicle() {
             priceFormatted: docSnap.data().priceFormatted,
             description: docSnap.data().description,
             title: docSnap.data().title,
-            id
+            id,
+            brand: docSnap.data().marca,
+            modelCar: docSnap.data().modelo,
+            traction: docSnap.data().tracao,
+            bodywork: docSnap.data().carroceria,
+            yearModel: docSnap.data().anoModelo,
+            yearFabrication: docSnap.data().anoFabricacao,
           });
         })
         .catch(err => console.log)
@@ -102,6 +114,10 @@ export default function Vehicle() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })
+
+  function createHtmlElementRed(text){
+    return <span style={{ color: '#eb2d2d' }}>{text}: </span>
+  }
   
   return (
     <WrapperInfo>
@@ -127,8 +143,14 @@ export default function Vehicle() {
           </InfoVehicle>
 
           <DescriptionVehicle>
-            <h2>R$ {formattedPrice}</h2>
-            <p>{vehicle?.description}</p>
+            <h2>Preço: R$ {formattedPrice}</h2>
+            <p>{createHtmlElementRed('Descrição')}{vehicle?.description}</p>
+            <p>{createHtmlElementRed('Marca')}{vehicle?.brand}</p>
+            <p>{createHtmlElementRed('Modelo do Carro')}{vehicle?.modelCar}</p>
+            <p>{createHtmlElementRed('Tração')}{vehicle?.traction}</p>
+            <p>{createHtmlElementRed('Carroceria')}{vehicle?.bodywork}</p>
+            <p>{createHtmlElementRed('Ano Modelo')}{vehicle?.yearModel}</p>
+            <p>{createHtmlElementRed('Ano Fabricação')}{vehicle?.yearFabrication}</p>
             <button><a href="">Entre em Contato</a></button>
           </DescriptionVehicle>
         </>

@@ -37,7 +37,7 @@ export const DescriptionVehicle = styled.div`
   }
 
   p {
-    margin-top: 13px;
+    margin-top: 5px;
     font-size: 19px;
     text-align: left !important;
     max-width: 300px;

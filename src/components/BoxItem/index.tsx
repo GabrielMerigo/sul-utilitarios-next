@@ -12,7 +12,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
 
   return (
     <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
-      <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <Box width={350} borderWidth="1px" borderRadius="lg" overflow="hidden">
         <Image height="15rem" width="30rem" src={mainImage.url} alt={description} />
 
         <Box p="6">
@@ -46,6 +46,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
             as="h4"
             lineHeight="tight"
             isTruncated
+
           >
             {description}
           </Box>
@@ -53,5 +54,4 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
       </Box>
     </Link>
   )
-
 }

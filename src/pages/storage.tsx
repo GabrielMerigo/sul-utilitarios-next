@@ -11,7 +11,7 @@ import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
 
 export default function Storage() {
-  const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
+  const [cars, setCars] = useState<VehiclesTypes[]>([]);
   const [trucks, setTrucks] = useState<VehiclesTypes[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ export default function Storage() {
       const trucksFiltered = resVehicles.filter((vehicle: VehiclesTypes) => vehicle.isTruck);
       const carsFiltered = resVehicles.filter((vehicle: VehiclesTypes) => !vehicle.isTruck);
       setTrucks(trucksFiltered)
-      setVehicles(carsFiltered);
+      setCars(carsFiltered);
     } catch (err) {
       console.log(err)
     } finally {
@@ -55,24 +55,24 @@ export default function Storage() {
           <LineTitle title="Carros" />
           <CarList>
           <Stack direction={['column', 'row']} spacing="24px">
-              {vehicles.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
-                <BoxItem
-                  key={index}
-                  mainImage={mainImage}
-                  title={title}
-                  description={description}
-                  priceFormatted={priceFormatted}
-                  id={id}
-                  isVehicle={true}
-                />
+              {!cars.length ? (
+                <Alert status='warning'>
+                <AlertIcon /> Estamos com o estoque de carros zerado...
+                </Alert>
+              ) : (
+                cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
+                  <BoxItem
+                    key={index}
+                    mainImage={mainImage}
+                    title={title}
+                    description={description}
+                    priceFormatted={priceFormatted}
+                    id={id}
+                    isVehicle={true}
+                  />
+                )
               ))}
             </Stack>
-            {!vehicles.length && (
-              <Alert status='warning'>
-                <AlertIcon />
-                Estamos com o estoque de carros zerado...
-              </Alert>
-            )}
           </CarList>
 
           <LineTitle title="Caminhões" />

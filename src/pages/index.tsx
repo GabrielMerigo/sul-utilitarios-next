@@ -16,9 +16,9 @@ import { LineTitle } from "../components/LineTitle";
 import { BoxItem } from "../components/BoxItem";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { db, collection, getDocs } from "../services/firebase";
 import { MainImage } from "../components/BoxItem/BoxItem";
+import { GetStaticProps } from "next";
 
 export interface VehiclesTypes {
   createdAt: string;
@@ -31,31 +31,8 @@ export interface VehiclesTypes {
   isTruck: boolean;
 }
 
-export default function Home() {
-  const [vehicles, setVehicles] = useState<VehiclesTypes[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  async function getVehicles(db) {
-    const vehiclesCol = collection(db, 'vehicles');
-    const vehicleSnapshot = await getDocs(vehiclesCol);
-    const vehicleList = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>;
-    return vehicleList
-  }
-
-  useEffect(() => {
-    setLoading(true);
-
-    getVehicles(db).then((res) => {
-      setVehicles(res)
-      console.log(res)
-    })
-    .catch(res => {
-      console.info('Não foi possível carregar os dados');
-    })
-    .finally(() => {
-      setLoading(false);
-    })
-  }, [])
+export default function Home({ vehiclesJSON }) {
+  const vehiclesReturned = JSON.parse(vehiclesJSON)
 
   return (
     <>
@@ -76,26 +53,20 @@ export default function Home() {
       <LineTitle title="Adicionados Recentemente" />
 
       <CarList>
-        {loading ? (
-          <Spinner>
-            <ImSpinner2 className="loader" />
-          </Spinner>
-        ) : (
-          <div className="boxCars" >
-            {vehicles.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
-              <BoxItem
-                key={id}
-                id={id}
-                mainImage={mainImage}
-                title={title}
-                description={description}
-                priceFormatted={priceFormatted}
-                isNew={true}
-                isVehicle={true}
-              />
-            ))}
-          </div>
-        )}
+        <div className="boxCars" >
+          {vehiclesReturned.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
+            <BoxItem
+              key={id}
+              id={id}
+              mainImage={mainImage}
+              title={title}
+              description={description}
+              priceFormatted={priceFormatted}
+              isNew={true}
+              isVehicle={true}
+            />
+          ))}
+        </div>
       </CarList>
 
       <Description>
@@ -136,4 +107,18 @@ export default function Home() {
       <Footer marginTop="0" position="static" direction="0" />
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const vehiclesCol = collection(db, 'vehicles');
+  const vehicleSnapshot = await getDocs(vehiclesCol);
+  const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>
+  const vehiclesJSON = JSON.stringify(vehicles)
+
+  return {
+    props: {
+      vehiclesJSON
+    },
+    revalidate: 60
+  }
 }
