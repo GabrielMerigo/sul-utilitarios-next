@@ -31,8 +31,8 @@ export interface VehiclesTypes {
   isTruck: boolean;
 }
 
-export default function Home({ vehiclesJSON }) {
-  const vehiclesReturned = JSON.parse(vehiclesJSON)
+export default function Home() {
+  // const vehiclesReturned = JSON.parse(vehiclesJSON)
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function Home({ vehiclesJSON }) {
 
       <CarList>
         <div className="boxCars" >
-          {vehiclesReturned.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
+          {/* {vehiclesReturned.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
             <BoxItem
               key={id}
               id={id}
@@ -65,7 +65,7 @@ export default function Home({ vehiclesJSON }) {
               isNew={true}
               isVehicle={true}
             />
-          ))}
+          ))} */}
         </div>
       </CarList>
 
@@ -109,16 +109,16 @@ export default function Home({ vehiclesJSON }) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const vehiclesCol = collection(db, 'vehicles');
-  const vehicleSnapshot = await getDocs(vehiclesCol);
-  const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>
-  const vehiclesJSON = JSON.stringify(vehicles)
+// export const getStaticProps: GetStaticProps = async () => {
+//   const vehiclesCol = collection(db, 'vehicles');
+//   const vehicleSnapshot = await getDocs(vehiclesCol);
+//   const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>
+//   const vehiclesJSON = JSON.stringify(vehicles)
 
-  return {
-    props: {
-      vehiclesJSON
-    },
-    revalidate: 60
-  }
-}
+//   return {
+//     props: {
+//       vehiclesJSON
+//     },
+//     revalidate: 60
+//   }
+// }
