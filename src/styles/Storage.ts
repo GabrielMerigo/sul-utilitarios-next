@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Spinner = styled.div`
   display: flex;
   justify-content: center;
+  
   .loader{
     width: 20rem;
     height: 20rem;
@@ -19,12 +20,31 @@ export const CarList = styled.div`
   max-width: 900px;
   margin:0 auto;
 
+  .warning{
+    width: 900px;
+  }
+
+  & > .boxCars{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+
   @media(max-width: 900px) {
-    & > div{
-      margin: 0.5rem;
+    & > .boxCars{
+      grid-template-columns: 1fr;
+    }
+
+    & > .boxCars > div{
+      width: 95%;
+      margin: 0 auto;
     }
     
     img{
+      width: 100%;
+    }
+
+    .warning{
       width: 100%;
     }
   }

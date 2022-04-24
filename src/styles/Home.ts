@@ -15,8 +15,9 @@ export const CarList = styled.div`
       grid-template-columns: 1fr;
     }
 
-    & > div{
-      margin: 0.5rem;
+    & > .boxCars > div{
+      width: 95%;
+      margin: 0 auto;
     }
     
     img{
@@ -253,5 +254,4 @@ export const CardBoard = styled.div`
     text-transform: uppercase;
     color: white;
   }
-  
 `;

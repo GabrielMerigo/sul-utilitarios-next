@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import Banner from '../assets/air-landing-hero.png';
 import { Footer } from "../components/Footer";
-import { Grid, HStack, Stack } from '@chakra-ui/react';
+import moment from 'moment';
 import Image from 'next/image';
 import {
   CarList,
@@ -11,17 +11,16 @@ import {
   WrapperBanner
 } from '../styles/Home';
 
-import { useEffect, useState } from "react";
 import { LineTitle } from "../components/LineTitle";
 import { BoxItem } from "../components/BoxItem";
-import { ImSpinner2 } from "react-icons/im";
-import { Spinner } from "../styles/Storage";
 import { db, collection, getDocs } from "../services/firebase";
 import { MainImage } from "../components/BoxItem/BoxItem";
 import { GetStaticProps } from "next";
 
 export interface VehiclesTypes {
-  createdAt: string;
+  createdAt: {
+    seconds: number;
+  }
   mainImage: MainImage;
   childImages: String[];
   title: string;
@@ -31,8 +30,21 @@ export interface VehiclesTypes {
   isTruck: boolean;
 }
 
-export default function Home() {
-  // const vehiclesReturned = JSON.parse(vehiclesJSON)
+export default function Home({ vehiclesJSON }) {
+  const vehiclesReturned = JSON.parse(vehiclesJSON)
+  console.log(vehiclesReturned)
+
+  const verifyData = ({seconds}) => {
+    const actualData = moment();
+    const created = moment(seconds * 1000).format("DD/MM/YYYY")
+    console.log(created)
+
+    const diff = moment(created, "DD/MM/YYYY").diff(moment(actualData, "DD/MM/YYYY"));
+    const diffrence = Math.floor(moment.duration(diff).asDays());
+    console.log(diffrence)
+    return diffrence > 7 ? false : true
+  };
+
 
   return (
     <>
@@ -53,8 +65,8 @@ export default function Home() {
       <LineTitle title="Adicionados Recentemente" />
 
       <CarList>
-        <div className="boxCars" >
-          {/* {vehiclesReturned.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id }) => (
+        <div className="boxCars">
+          {vehiclesReturned.slice(0, 6).map(({ mainImage, title, description, priceFormatted, id, createdAt }) => (
             <BoxItem
               key={id}
               id={id}
@@ -62,10 +74,10 @@ export default function Home() {
               title={title}
               description={description}
               priceFormatted={priceFormatted}
-              isNew={true}
+              isNew={verifyData(createdAt)}
               isVehicle={true}
             />
-          ))} */}
+          ))}
         </div>
       </CarList>
 
@@ -109,16 +121,16 @@ export default function Home() {
   )
 }
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const vehiclesCol = collection(db, 'vehicles');
-//   const vehicleSnapshot = await getDocs(vehiclesCol);
-//   const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>
-//   const vehiclesJSON = JSON.stringify(vehicles)
+export const getStaticProps: GetStaticProps = async () => {
+  const vehiclesCol = collection(db, 'vehicles');
+  const vehicleSnapshot = await getDocs(vehiclesCol);
+  const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>
+  const vehiclesJSON = JSON.stringify(vehicles)
 
-//   return {
-//     props: {
-//       vehiclesJSON
-//     },
-//     revalidate: 60
-//   }
-// }
+  return {
+    props: {
+      vehiclesJSON
+    },
+    revalidate: 60
+  }
+}

@@ -54,30 +54,30 @@ export default function Storage() {
         <>
           <LineTitle title="Carros" />
           <CarList>
-          <Stack direction={['column', 'row']} spacing="24px">
-              {!cars.length ? (
-                <Alert status='warning'>
-                <AlertIcon /> Estamos com o estoque de carros zerado...
-                </Alert>
-              ) : (
-                cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
-                  <BoxItem
-                    key={index}
-                    mainImage={mainImage}
-                    title={title}
-                    description={description}
-                    priceFormatted={priceFormatted}
-                    id={id}
-                    isVehicle={true}
-                  />
-                )
-              ))}
-            </Stack>
+            <div className="boxCars">
+                {!cars.length ? (
+                  <Alert className="warning" status='warning'>
+                    <AlertIcon /> Ainda não há carros em estoque...
+                  </Alert>
+                ) : (
+                  cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
+                    <BoxItem
+                      key={index}
+                      mainImage={mainImage}
+                      title={title}
+                      description={description}
+                      priceFormatted={priceFormatted}
+                      id={id}
+                      isVehicle={true}
+                    />
+                  )
+                ))}
+            </div>
           </CarList>
 
           <LineTitle title="Caminhões" />
           <CarList>
-            <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+            <div className="boxCars">
               {trucks.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
                 <BoxItem
                   isVehicle={false}
@@ -89,19 +89,18 @@ export default function Storage() {
                   id={id}
                 />
               ))}
-            </Grid>
-            
+            </div>
+
             {!trucks.length && (
-              <Alert status='warning'>
-                <AlertIcon />
-                Estamos com o estoque de caminhões zerado...
+              <Alert className="warning" status='warning'>
+                <AlertIcon /> Ainda não há caminhões em estoque...
               </Alert>
             )}
           </CarList>
         </>
       )}
 
-      <Footer marginTop="2" position="static" direction="0" />
+      <Footer marginTop="10" position="static" direction="0" />
     </>
   )
 }

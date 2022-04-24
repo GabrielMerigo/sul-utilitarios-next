@@ -12,7 +12,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
 
   return (
     <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
-      <Box width={100} borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <Box width={295} borderWidth="1px" borderRadius="lg" overflow="hidden">
         <Image height="15rem" width="30rem" src={mainImage.url} alt={description} />
 
         <Box p="6">
