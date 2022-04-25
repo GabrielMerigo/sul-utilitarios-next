@@ -8,7 +8,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
   const formattedPrice = Number(priceFormatted).toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
-  })
+  });
 
   return (
     <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
