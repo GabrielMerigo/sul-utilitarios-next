@@ -28,14 +28,9 @@ export const HeaderContainer = styled.header`
   }
 
   @media(max-width: 900px) {
-
-    span{
-      background-color:red;
-    }
-
     ul{
       flex-direction: column;
-      margin-right: 10rem;
+      margin-right: 10.5rem;
     }
 
     img{
