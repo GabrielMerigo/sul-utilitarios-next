@@ -1,14 +1,24 @@
-import { HeaderContainer } from './styles';
+import * as S from './styles';
 import Logo from '../../assets/logo-loja.png';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  MenuGroup,
+  Button
+} from '@chakra-ui/react'
 
 export function Header() {
   const { pathname } = useRouter();
 
   return (
-    <HeaderContainer>
+    <S.HeaderContainer>
       <Link href="/" passHref>
         <Image src={Logo} alt="Logo Sul Utilitarios" />
       </Link>
@@ -20,6 +30,25 @@ export function Header() {
           <Link href="/contact"><a style={{ color: `${pathname === '/contact' ? 'red' : '#333333'}` }}>Contato</a></Link>
         </ul>
       </nav>
-    </HeaderContainer>
+  
+      <S.MenuHamburguer>
+        <Menu>
+          <MenuButton zIndex={9999} as={Button} background="gray" color="white">
+            <GiHamburgerMenu></GiHamburgerMenu>
+          </MenuButton>
+          <MenuList>
+            <MenuGroup title='Profile'>
+              <MenuItem>My Account</MenuItem>
+              <MenuItem>Payments </MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup title='Help'>
+              <MenuItem>Docs</MenuItem>
+              <MenuItem>FAQ</MenuItem>
+            </MenuGroup>
+          </MenuList>
+        </Menu>
+      </S.MenuHamburguer>
+    </S.HeaderContainer>
   )
 }

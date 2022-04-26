@@ -6,6 +6,10 @@ export const HeaderContainer = styled.header`
   margin-top: 1rem;
   line-height: 1.5rem;
 
+  .menuHamburguer{
+    display: none;
+  }
+
   img{
     margin-left:11rem;
     cursor: pointer;
@@ -28,15 +32,23 @@ export const HeaderContainer = styled.header`
   }
 
   @media(max-width: 900px) {
+
     ul{
-      flex-direction: column;
-      margin-right: 10.5rem;
+      display: none;
     }
 
     img{
-      visibility: hidden;
+      width: 100px;
+      height: 100px;
     } 
   }
-  
+`;
 
+export const MenuHamburguer = styled.header`
+  margin-right: 10px;
+  display: none;
+
+  @media(max-width: 900px) {
+    display: block;
+  }
 `;
