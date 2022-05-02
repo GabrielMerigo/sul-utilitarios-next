@@ -32,15 +32,14 @@ export const HeaderContainer = styled.header`
   }
 
   @media(max-width: 900px) {
-
     ul{
       display: none;
     }
 
     img{
-      width: 100px;
-      height: 100px;
-    } 
+      width: 350px !important;
+      margin-left: -2rem !important;
+    }
   }
 `;
 
@@ -50,5 +49,6 @@ export const MenuHamburguer = styled.header`
 
   @media(max-width: 900px) {
     display: block;
+    z-index: 9999;
   }
 `;

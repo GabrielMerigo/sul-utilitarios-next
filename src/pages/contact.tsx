@@ -13,12 +13,12 @@ export default function Contact() {
       <LineHeaderRed />
       <LineTitle title="Contato" />
       <ContainerButton>
-        <button onClick={() => router.push('https://api.whatsapp.com/send?phone=5551999760312&text=Ol%C3%A1%2C%20poderia%20me%20ajudar%3F')}>
+        <button style={{ 'marginBottom': '30px' }} onClick={() => router.push('https://api.whatsapp.com/send?phone=5551999760312&text=Ol%C3%A1%2C%20poderia%20me%20ajudar%3F')}>
           Contatar pelo Whatsapp
           <RiWhatsappLine/>
         </button>
       </ContainerButton>
-      <Footer marginTop="0" position="static" direction="0"></Footer>
+      <Footer marginTop="111rem" position="static" direction="0"></Footer>
     </>
   )
 }

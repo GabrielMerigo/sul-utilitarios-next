@@ -9,13 +9,16 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
   MenuGroup,
   Button
 } from '@chakra-ui/react'
 
 export function Header() {
   const { pathname } = useRouter();
+
+  function verifyPathName(pathname: string, value: string){
+    return pathname === value ? '#eb2d2d' : '#333333'
+  }
 
   return (
     <S.HeaderContainer>
@@ -24,27 +27,24 @@ export function Header() {
       </Link>
       <nav>
         <ul>
-          <Link href="/"><a style={{ color: `${pathname === '/' ? 'red' : '#333333'}` }}>Principal</a></Link>
-          <Link href="/storage"><a style={{ color: `${pathname === '/storage' ? 'red' : '#333333'}` }}>Estoque</a></Link>
-          <Link href="/about"><a style={{ color: `${pathname === '/about' ? 'red' : '#333333'}` }}>Sobre</a></Link>
-          <Link href="/contact"><a style={{ color: `${pathname === '/contact' ? 'red' : '#333333'}` }}>Contato</a></Link>
+          <Link href="/"><a style={{ color: verifyPathName(pathname, '/') }}>Principal</a></Link>
+          <Link href="/storage"><a style={{ color: verifyPathName(pathname, '/storage') }}>Estoque</a></Link>
+          <Link href="/about"><a style={{ color: verifyPathName(pathname, '/about') }}>Sobre</a></Link>
+          <Link href="/contact"><a style={{ color: verifyPathName(pathname, '/contact')  }}>Contato</a></Link>
         </ul>
       </nav>
   
       <S.MenuHamburguer>
         <Menu>
-          <MenuButton zIndex={9999} as={Button} background="gray" color="white">
+          <MenuButton as={Button} backgroundColor="#c22323" color="white">
             <GiHamburgerMenu></GiHamburgerMenu>
           </MenuButton>
           <MenuList>
-            <MenuGroup title='Profile'>
-              <MenuItem>My Account</MenuItem>
-              <MenuItem>Payments </MenuItem>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup title='Help'>
-              <MenuItem>Docs</MenuItem>
-              <MenuItem>FAQ</MenuItem>
+            <MenuGroup>
+              <Link passHref href="/"><a style={{ color: verifyPathName(pathname, '/') }}><MenuItem>Principal</MenuItem></a></Link>
+              <Link passHref href="/storage"><a style={{ color: verifyPathName(pathname, '/storage') }}><MenuItem>Estoque</MenuItem></a></Link>
+              <Link passHref href="/about"><a style={{ color: verifyPathName(pathname, '/about') }}><MenuItem>Sobre</MenuItem></a></Link>
+              <Link passHref href="/contact"><a style={{ color: verifyPathName(pathname, '/contact') }}><MenuItem>Contato</MenuItem></a></Link>
             </MenuGroup>
           </MenuList>
         </Menu>

@@ -53,7 +53,13 @@ export const ContainerButton = styled.div`
     &:hover{
       filter: brightness(0.7);
     }
+
+    @media(max-width: 900px) {
+      width: 350px;
+      padding: 1.5rem;
+    }
   }
+
   button:nth-child(2){
     margin-left: 1rem;
     background-color: var(--gray-dark)
