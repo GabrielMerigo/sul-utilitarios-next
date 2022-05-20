@@ -1,8 +1,13 @@
 import { Header } from "../components/Header";
-import Banner from '../assets/air-landing-hero.png';
 import { Footer } from "../components/Footer";
 import moment from 'moment';
 import Image from 'next/image';
+import { LineTitle } from "../components/LineTitle";
+import { BoxItem } from "../components/BoxItem";
+import { db, collection, getDocs } from "../services/firebase";
+import { MainImage } from "../components/BoxItem/BoxItem";
+import { GetServerSideProps } from "next";
+
 import {
   CarList,
   Description,
@@ -11,16 +16,8 @@ import {
   WrapperBanner
 } from '../styles/Home';
 
-import { LineTitle } from "../components/LineTitle";
-import { BoxItem } from "../components/BoxItem";
-import { db, collection, getDocs } from "../services/firebase";
-import { MainImage } from "../components/BoxItem/BoxItem";
-import { GetStaticProps } from "next";
-
 export interface VehiclesTypes {
-  createdAt: {
-    seconds: number;
-  }
+  createdAt: { seconds: number; }
   mainImage: MainImage;
   childImages: String[];
   title: string;
@@ -37,14 +34,10 @@ export default function Home({ vehiclesJSON }) {
   const verifyData = ({seconds}) => {
     const actualData = moment();
     const created = moment(seconds * 1000).format("DD/MM/YYYY")
-    console.log(created)
-
     const diff = moment(created, "DD/MM/YYYY").diff(moment(actualData, "DD/MM/YYYY"));
     const diffrence = Math.floor(moment.duration(diff).asDays());
-    console.log(diffrence)
     return diffrence > 7 ? false : true
   };
-
 
   return (
     <>
@@ -53,14 +46,6 @@ export default function Home({ vehiclesJSON }) {
         <div>
           <h1>O melhor do comércio automotivo é na <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
         </div>
-        <span className="img">
-          <Image
-            src={Banner}
-            alt="Banner"
-            width={1000}
-            height={450}
-          />
-        </span>
       </WrapperBanner>
       <LineTitle title="Adicionados Recentemente" />
 
@@ -121,16 +106,15 @@ export default function Home({ vehiclesJSON }) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const vehiclesCol = collection(db, 'vehicles');
   const vehicleSnapshot = await getDocs(vehiclesCol);
-  const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>
-  const vehiclesJSON = JSON.stringify(vehicles)
+  const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>;
+  const vehiclesJSON = JSON.stringify(vehicles);
 
   return {
     props: {
       vehiclesJSON
-    },
-    revalidate: 60
+    }
   }
 }

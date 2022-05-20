@@ -40,20 +40,17 @@ export const WrapperBanner = styled.div`
   }
 
   div{
-    position: absolute;
-    width: 370px;
+    width: 100%;
     height: 450px;
-    z-index: 999;
     background: #333333;
     display: block;
     margin-right: 2rem;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    margin-bottom: 2rem;
 
     h1{
-      width: 400px;
+      width: 450px;
       color: white;
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       margin-left: 10rem;
       position: absolute;
       font-family: 'Lato', sans-serif;

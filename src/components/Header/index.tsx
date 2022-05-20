@@ -30,7 +30,6 @@ export function Header() {
           <Link href="/"><a style={{ color: verifyPathName(pathname, '/') }}>Principal</a></Link>
           <Link href="/storage"><a style={{ color: verifyPathName(pathname, '/storage') }}>Estoque</a></Link>
           <Link href="/about"><a style={{ color: verifyPathName(pathname, '/about') }}>Sobre</a></Link>
-          <Link href="/contact"><a style={{ color: verifyPathName(pathname, '/contact')  }}>Contato</a></Link>
         </ul>
       </nav>
   
@@ -44,7 +43,6 @@ export function Header() {
               <Link passHref href="/"><a style={{ color: verifyPathName(pathname, '/') }}><MenuItem>Principal</MenuItem></a></Link>
               <Link passHref href="/storage"><a style={{ color: verifyPathName(pathname, '/storage') }}><MenuItem>Estoque</MenuItem></a></Link>
               <Link passHref href="/about"><a style={{ color: verifyPathName(pathname, '/about') }}><MenuItem>Sobre</MenuItem></a></Link>
-              <Link passHref href="/contact"><a style={{ color: verifyPathName(pathname, '/contact') }}><MenuItem>Contato</MenuItem></a></Link>
             </MenuGroup>
           </MenuList>
         </Menu>
