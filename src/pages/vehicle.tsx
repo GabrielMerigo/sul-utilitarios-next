@@ -1,8 +1,6 @@
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
-import Carro from '../assets/carro-do-pai.jpg'
 import { InfoVehicle, DescriptionVehicle, WrapperInfo } from '../styles/Vehicle';
-import Image from 'next/image';
 import { LineTitle } from "../components/LineTitle";
 import { LineHeaderRed } from "../components/LineHeaderRed";
 import Slider from "react-slick";

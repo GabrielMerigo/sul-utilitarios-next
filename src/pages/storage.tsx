@@ -6,7 +6,7 @@ import { LineHeaderRed } from "../components/LineHeaderRed";
 import { VehiclesTypes } from "./index";
 import { ImSpinner2 } from "react-icons/im";
 import { LineTitle } from '../components/LineTitle';
-import { Alert, AlertIcon, Grid, Stack } from '@chakra-ui/react';
+import { Alert, AlertIcon } from '@chakra-ui/react';
 import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
 
@@ -15,7 +15,7 @@ export default function Storage() {
   const [trucks, setTrucks] = useState<VehiclesTypes[]>([]);
   const [loading, setLoading] = useState(false);
 
-  async function getVehicles(db) {
+  async function getVehicles() {
     const vehiclesCol = collection(db, 'vehicles');
     const vehicleSnapshot = await getDocs(vehiclesCol);
     const vehicleList = vehicleSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })) as Array<VehiclesTypes>;
@@ -25,7 +25,7 @@ export default function Storage() {
   async function renderVehicles() {
     try {
       setLoading(true);
-      const resVehicles = await getVehicles(db);
+      const resVehicles = await getVehicles();
       const trucksFiltered = resVehicles.filter((vehicle: VehiclesTypes) => vehicle.isTruck);
       const carsFiltered = resVehicles.filter((vehicle: VehiclesTypes) => !vehicle.isTruck);
       setTrucks(trucksFiltered)

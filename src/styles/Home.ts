@@ -42,7 +42,7 @@ export const WrapperBanner = styled.div`
   div{
     width: 100%;
     height: 450px;
-    background: red;
+    background: #333333;
     display: block;
     margin-right: 2rem;
     margin-bottom: 2rem;
