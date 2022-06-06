@@ -14,6 +14,7 @@ import {
   Map,
   WrapperBanner
 } from '../styles/Home';
+import Link from "next/link";
 
 export interface VehiclesTypes {
   createdAt: { seconds: number; }
@@ -76,7 +77,9 @@ export default function Home({ vehiclesJSON }) {
               <li>Indicação de Mecanicos e Peças</li>
             </ul>
           </div>
-          <button>Saiba Mais</button>
+          <Link passHref href="/about">
+            <button>Saiba Mais</button>
+          </Link>
         </div>
 
         <div>

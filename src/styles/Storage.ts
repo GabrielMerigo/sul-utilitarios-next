@@ -49,3 +49,7 @@ export const CarList = styled.div`
     }
   }
 `;
+
+export const AlertWrapper = styled.div`
+  margin: 0 10px;
+`

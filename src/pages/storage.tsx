@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { CarList, Spinner } from '../styles/Storage';
+import { useEffect, useState } from 'react';
+import { CarList, Spinner, AlertWrapper } from '../styles/Storage';
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { LineHeaderRed } from "../components/LineHeaderRed";
@@ -56,9 +56,11 @@ export default function Storage() {
           <CarList>
             <div className="boxCars">
                 {!cars.length ? (
-                  <Alert className="warning" status='warning'>
-                    <AlertIcon /> Ainda não há carros em estoque...
-                  </Alert>
+                  <AlertWrapper>
+                    <Alert className="warning" status='warning'>
+                      <AlertIcon /> Ainda não há carros em estoque...
+                    </Alert>
+                  </AlertWrapper>
                 ) : (
                   cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
                     <BoxItem
@@ -92,9 +94,11 @@ export default function Storage() {
             </div>
 
             {!trucks.length && (
-              <Alert className="warning" status='warning'>
-                <AlertIcon /> Ainda não há caminhões em estoque...
-              </Alert>
+              <AlertWrapper>
+                <Alert className="warning" status='warning'>
+                  <AlertIcon /> Ainda não há caminhões em estoque...
+                </Alert>
+              </AlertWrapper>
             )}
           </CarList>
         </>
