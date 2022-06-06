@@ -1,7 +1,6 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import moment from 'moment';
-import Image from 'next/image';
 import { LineTitle } from "../components/LineTitle";
 import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
@@ -29,7 +28,6 @@ export interface VehiclesTypes {
 
 export default function Home({ vehiclesJSON }) {
   const vehiclesReturned = JSON.parse(vehiclesJSON)
-  console.log(vehiclesReturned)
 
   const verifyData = ({seconds}) => {
     const actualData = moment();

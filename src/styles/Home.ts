@@ -57,6 +57,7 @@ export const WrapperBanner = styled.div`
     }
   }
 
+
   @media(max-width: 900px) {
     display: flex;
     flex-direction: column;
@@ -69,6 +70,8 @@ export const WrapperBanner = styled.div`
       width: 100%;
       height: 280px;
       position: relative;
+      height: 420px;
+      background: #333333;
 
       h1{
         width: 280px;

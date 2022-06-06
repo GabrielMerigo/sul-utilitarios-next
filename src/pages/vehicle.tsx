@@ -1,6 +1,6 @@
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
-import { InfoVehicle, DescriptionVehicle, WrapperInfo } from '../styles/Vehicle';
+import { InfoVehicle, DescriptionVehicle, WrapperInfo, ParentImage } from '../styles/Vehicle';
 import { LineTitle } from "../components/LineTitle";
 import { LineHeaderRed } from "../components/LineHeaderRed";
 import Slider from "react-slick";
@@ -132,9 +132,9 @@ export default function Vehicle() {
             <Slider {...settings}>
               {vehicle?.childImages.map((img, index) => (
                 <div key={index}>
-                  <div style={{ border: '1px solid black' }}>
+                  <ParentImage>
                     <img style={{ height: '450px', width: '100%' }} src={img.url} alt={vehicle?.title} />
-                  </div>
+                  </ParentImage>
                 </div>
               ))}
             </Slider>
@@ -154,7 +154,7 @@ export default function Vehicle() {
         </>
       )}
 
-      <Footer marginTop="2" position="static" direction="10" />
+      <Footer marginTop="4" position="static" direction="10" />
     </WrapperInfo>
   )
 }

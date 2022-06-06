@@ -52,8 +52,7 @@ export default function Vehicle() {
 
   useEffect(() => {
     getVehicle();
-  }, [getVehicle])
-
+  }, [getVehicle]);
 
   function SamplePrevArrow(props: any) {
     const { className, style, onClick } = props;

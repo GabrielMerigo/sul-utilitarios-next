@@ -12,7 +12,7 @@ export const AboutContainer = styled.section`
     border: 1px solid black;
 
     @media(max-width: 900px) {
-      width: 30rem;
+      width: 34rem;
     }
   }
 
@@ -51,7 +51,7 @@ export const AboutContainer = styled.section`
       flex-direction: column;
       
       .imgOwner{
-        width:29rem;
+        width:34rem;
         margin: 1rem;
       }
 

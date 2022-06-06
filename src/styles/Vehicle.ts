@@ -7,7 +7,7 @@ export const WrapperInfo = styled.div`
 
 export const InfoVehicle = styled.div`
   display: inline-block;
-  width: 100%;
+  width: 39.6rem;
   padding: 0 2%;
   max-width: 700px;
   align-items: middle;
@@ -20,8 +20,17 @@ export const InfoVehicle = styled.div`
 
     
   @media(max-width: 900px) {
+    margin: 1rem;
+    width: 30rem;
+    text-align: left;
+
     & > div{
-      margin: 1.5rem;
+      margin: 0.6rem;
+
+      & > img{
+        width: 10rem;
+        background-size: cover; //imagem cobre toda área do div
+      }
     }
   }
 `;
@@ -31,6 +40,11 @@ export const DescriptionVehicle = styled.div`
 	display: inline-block;
   padding: 20px;
   text-align: left !important;
+
+  @media(max-width: 900px) {
+    display: block;
+    margin-left: 3rem;
+  }
 
   h2 {
     font-size: 22px;
@@ -61,3 +75,7 @@ export const DescriptionVehicle = styled.div`
     }
   }
 `;
+
+export const ParentImage = styled.div`
+  border: 1px solid black;
+`

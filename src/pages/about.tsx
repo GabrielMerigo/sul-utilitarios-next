@@ -33,7 +33,7 @@ export default function About() {
           </p>
         </div>
       </AboutContainer>
-      <Footer marginTop="0" position="static" direction="0" />
+      <Footer marginTop="5" position="static" direction="0" />
     </>
   )
 }
