@@ -12,8 +12,7 @@ export const AboutContainer = styled.section`
     border: 1px solid black;
 
     @media(max-width: 900px) {
-      width: 34rem;
-
+      width: 30rem;
     }
   }
 
@@ -54,6 +53,10 @@ export const AboutContainer = styled.section`
       .imgOwner{
         width:34rem;
         margin: 1rem;
+
+        @media(max-width: 900px) {
+          width: 30rem;
+        }
       }
 
       p{
