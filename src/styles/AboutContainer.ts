@@ -13,6 +13,7 @@ export const AboutContainer = styled.section`
 
     @media(max-width: 900px) {
       width: 34rem;
+
     }
   }
 
