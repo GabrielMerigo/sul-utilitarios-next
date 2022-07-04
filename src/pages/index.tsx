@@ -6,6 +6,10 @@ import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
 import { MainImage } from "../components/BoxItem/BoxItem";
 import { GetServerSideProps } from "next";
+import ImageCaminhao from '../assets/caminhao.jpeg'
+import Image from "next/image";
+import Link from "next/link";
+import * as S from '../styles/Home'
 
 import {
   CarList,
@@ -14,8 +18,6 @@ import {
   Map,
   WrapperBanner
 } from '../styles/Home';
-import Link from "next/link";
-
 export interface VehiclesTypes {
   createdAt: { seconds: number; }
   mainImage: MainImage;
@@ -30,12 +32,12 @@ export interface VehiclesTypes {
 export default function Home({ vehiclesJSON }) {
   const vehiclesReturned = JSON.parse(vehiclesJSON)
 
-  const verifyData = ({seconds}) => {
+  const verifyData = ({ seconds }) => {
     const actualData = moment();
     const created = moment(seconds * 1000).format("DD/MM/YYYY")
     const diff = moment(created, "DD/MM/YYYY").diff(moment(actualData, "DD/MM/YYYY"));
     const diffrence = Math.floor(moment.duration(diff).asDays());
-    return diffrence > 7 ? false : true
+    return diffrence > 7 ? false : true;
   };
 
   return (
@@ -43,7 +45,9 @@ export default function Home({ vehiclesJSON }) {
       <Header />
       <WrapperBanner>
         <div>
-          <h1>O melhor do comércio automotivo é na <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
+          <div style={{ height: '200px' }}>
+            <h1>O melhor do comércio automotivo é na <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
+          </div>
         </div>
       </WrapperBanner>
       <LineTitle title="Adicionados Recentemente" />
@@ -110,7 +114,7 @@ export default function Home({ vehiclesJSON }) {
 export const getServerSideProps: GetServerSideProps = async () => {
   const vehiclesCol = collection(db, 'vehicles');
   const vehicleSnapshot = await getDocs(vehiclesCol);
-  const vehicles = vehicleSnapshot.docs.map(doc => ({...doc.data(), id: doc.id})) as Array<VehiclesTypes>;
+  const vehicles = vehicleSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })) as Array<VehiclesTypes>;
   const vehiclesJSON = JSON.stringify(vehicles);
 
   return {

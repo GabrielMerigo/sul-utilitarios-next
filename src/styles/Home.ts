@@ -43,9 +43,11 @@ export const WrapperBanner = styled.div`
     width: 100%;
     height: 450px;
     background: #333333;
-    display: block;
+    display: flex;
+    flex-direction: row;
     margin-right: 2rem;
     margin-bottom: 2rem;
+    padding: 20px;
 
     h1{
       width: 450px;
@@ -53,15 +55,16 @@ export const WrapperBanner = styled.div`
       font-size: 3.8rem;
       margin-left: 10rem;
       position: absolute;
-      font-family: 'Lato', sans-serif;
+      font-style: italic;
+      z-index: 0;
+    }
+
+    img {
+      border-radius: 0.5rem;
     }
   }
 
-
   @media(max-width: 900px) {
-    display: flex;
-    flex-direction: column;
-
     .img{
       margin-left: -60px;
     }
@@ -72,6 +75,8 @@ export const WrapperBanner = styled.div`
       position: relative;
       height: 420px;
       background: #333333;
+      display: flex;
+      flex-direction: column;
 
       h1{
         width: 280px;
