@@ -1,7 +1,5 @@
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
-import Carro from '../assets/carro-do-pai.jpg'
-
 import { InfoVehicle, DescriptionVehicle, WrapperInfo, ParentImage } from '../styles/Vehicle';
 import Image from 'next/image';
 import { LineTitle } from "../components/LineTitle";
@@ -13,6 +11,7 @@ import { db, getDoc, doc } from "../services/firebase";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
+import { createHtmlElementRed, verifyPrice } from '../utils/methods';
 
 interface ChildImages {
   error: boolean
@@ -116,49 +115,46 @@ export default function Vehicle() {
   });
 
 
-  function createHtmlElementRed(text){
-    return <span style={{ color: '#eb2d2d' }}>{text}: </span>
-  }
-  
-
   return (
-    <WrapperInfo>
+    <>
     <Header />
-    <LineHeaderRed />
-    {loading ? (
-      <Spinner>
-        <ImSpinner2 className="loader" />
-      </Spinner>
-    ) : (
-      <>
-          <LineTitle title={vehicle?.title} />
-          <InfoVehicle>
-            <Slider {...settings}>
-              {vehicle?.childImages.map((img, index) => (
-                <div key={index}>
-                  <ParentImage>
-                    <img style={{ height: '450px', width: '100%' }} src={img.url} alt={vehicle?.title} />
-                  </ParentImage>
-                </div>
-              ))}
-            </Slider>
-          </InfoVehicle>
+    <WrapperInfo>
+      <LineHeaderRed />
+      {loading ? (
+        <Spinner>
+          <ImSpinner2 className="loader" />
+        </Spinner>
+      ) : (
+        <>
+            <LineTitle title={vehicle?.title} />
+            <InfoVehicle>
+              <Slider {...settings}>
+                {vehicle?.childImages.map((img, index) => (
+                  <div key={index}>
+                    <ParentImage>
+                      <img src={img.url} alt={vehicle?.title} />
+                    </ParentImage>
+                  </div>
+                ))}
+              </Slider>
+            </InfoVehicle>
 
-          <DescriptionVehicle>
-            <h2>Preço: R$ {formattedPrice}</h2>
-            <p>{createHtmlElementRed('Descrição')}{vehicle?.description}</p>
-            <p>{createHtmlElementRed('Marca')}{vehicle?.brand}</p>
-            <p>{createHtmlElementRed('Modelo do Carro')}{vehicle?.modelCar}</p>
-            <p>{createHtmlElementRed('Tração')}{vehicle?.traction}</p>
-            <p>{createHtmlElementRed('Carroceria')}{vehicle?.bodywork}</p>
-            <p>{createHtmlElementRed('Ano Modelo')}{vehicle?.yearModel}</p>
-            <p>{createHtmlElementRed('Ano Fabricação')}{vehicle?.yearFabrication}</p>
+            <DescriptionVehicle>
+            <h2>Preço: {verifyPrice(formattedPrice)}</h2>
+            <p>{createHtmlElementRed('Descrição', vehicle?.description)}{vehicle?.description}</p>
+            <p>{createHtmlElementRed('Marca', vehicle?.brand)}{vehicle?.brand}</p>
+            <p>{createHtmlElementRed('Modelo do Carro', vehicle?.modelCar)}{vehicle?.modelCar}</p>
+            <p>{createHtmlElementRed('Tração', vehicle?.traction)}{vehicle?.traction}</p>
+            <p>{createHtmlElementRed('Carroceria', vehicle?.bodywork)}{vehicle?.bodywork}</p>
+            <p>{createHtmlElementRed('Ano Modelo', vehicle?.yearModel)}{vehicle?.yearModel}</p>
+            <p>{createHtmlElementRed('Ano Fabricação', vehicle?.yearFabrication)}{vehicle?.yearFabrication}</p>
             <button><a href="">Entre em Contato</a></button>
-          </DescriptionVehicle>
-        </>
-      )}
+            </DescriptionVehicle>
+          </>
+        )}
 
+      </WrapperInfo>
       <Footer marginTop="4" position="static" direction="10" />
-    </WrapperInfo>
+    </>
   )
 }

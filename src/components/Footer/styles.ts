@@ -7,7 +7,7 @@ interface FooterContainerProps {
 }
 
 export const FooterContainer = styled.section<FooterContainerProps>`
-  width: 100%;
+  width: 100vw;
   height: 9rem;
   padding: 0.3rem 2rem;
   background: var(--gray-dark);

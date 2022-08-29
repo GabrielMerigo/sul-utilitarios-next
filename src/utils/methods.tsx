@@ -11,3 +11,7 @@ export function verifyPrice(price: string){
     return values[price]
   }
 }
+
+export function createHtmlElementRed(text, valueState: string){
+  return valueState ? <span style={{ color: '#eb2d2d' }}>{text}: </span> : '';
+}

@@ -10,8 +10,7 @@ import { db, getDoc, doc } from "../services/firebase";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
-import { verifyPrice } from '../utils/methods';
-
+import { createHtmlElementRed, verifyPrice } from '../utils/methods';
 interface ChildImages {
   error: boolean
   id: string
@@ -113,12 +112,9 @@ export default function Vehicle() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })
-
-  function createHtmlElementRed(text, valueState: string){
-    return valueState ? <span style={{ color: '#eb2d2d' }}>{text}: </span> : '';
-  }
   
   return (
+    <>
     <WrapperInfo>
       <Header />
       <LineHeaderRed />
@@ -155,7 +151,8 @@ export default function Vehicle() {
         </>
       )}
 
+      </WrapperInfo>
       <Footer marginTop="4" position="static" direction="10" />
-    </WrapperInfo>
+    </>
   )
 }

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 export const WrapperInfo = styled.div`
   margin: 0 auto;
   text-align: center;
+  width: 100%;
 `;
 
 export const InfoVehicle = styled.div`
   display: inline-block;
   width: 39.6rem;
   padding: 0 2%;
-  max-width: 700px;
+  /* max-width: 700px; */
   align-items: middle;
   margin-top: 1rem;
 
@@ -78,4 +79,8 @@ export const DescriptionVehicle = styled.div`
 
 export const ParentImage = styled.div`
   border: 1px solid black;
+
+  img {
+    
+  }
 `

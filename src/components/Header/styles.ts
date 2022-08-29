@@ -5,6 +5,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   margin-top: 1rem;
   line-height: 1.5rem;
+  width: 100%;
 
   .menuHamburguer{
     display: none;
