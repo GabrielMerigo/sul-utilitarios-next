@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AboutContainer = styled.section`
+export const AboutContent = styled.section`
   display: flex;
   flex-direction:column;
 
@@ -62,5 +62,11 @@ export const AboutContainer = styled.section`
         padding: 1rem;
       }
     }
+  }
+`;
+
+export const AboutContainer = styled.div`
+  @media(max-width: 900px) {
+    width: 100%;
   }
 `;

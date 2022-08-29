@@ -2,17 +2,17 @@ import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { LineHeaderRed } from "../components/LineHeaderRed";
 import { LineTitle } from "../components/LineTitle";
-import { AboutContainer } from '../styles/AboutContainer';
+import { AboutContent, AboutContainer } from '../styles/AboutContainer';
 import BackgroundImage from '../assets/background.jpg'
 import Image from 'next/image'
 
 export default function About() {
   return (
-    <>
+    <AboutContainer>
       <Header />
       <LineHeaderRed />
       <LineTitle title="Sobre" />
-      <AboutContainer>
+      <AboutContent>
         <div className="imgCompany">
           <Image src={BackgroundImage} alt="foto de um caminhão virado para direita" />   
         </div>
@@ -37,8 +37,8 @@ export default function About() {
             nosso negócio.
           </p>
         </div>
-      </AboutContainer>
+      </AboutContent>
       <Footer marginTop="5" position="static" direction="0" />
-    </>
+    </AboutContainer>
   )
 }
