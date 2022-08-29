@@ -6,10 +6,7 @@ import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
 import { MainImage } from "../components/BoxItem/BoxItem";
 import { GetServerSideProps } from "next";
-import ImageCaminhao from '../assets/caminhao.jpeg'
-import Image from "next/image";
 import Link from "next/link";
-import * as S from '../styles/Home'
 
 import {
   CarList,

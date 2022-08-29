@@ -10,6 +10,7 @@ import { db, getDoc, doc } from "../services/firebase";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { Spinner } from "../styles/Storage";
+import { verifyPrice } from '../utils/methods';
 
 interface ChildImages {
   error: boolean
@@ -113,8 +114,8 @@ export default function Vehicle() {
     maximumFractionDigits: 2
   })
 
-  function createHtmlElementRed(text){
-    return <span style={{ color: '#eb2d2d' }}>{text}: </span>
+  function createHtmlElementRed(text, valueState: string){
+    return valueState ? <span style={{ color: '#eb2d2d' }}>{text}: </span> : '';
   }
   
   return (
@@ -141,14 +142,14 @@ export default function Vehicle() {
           </InfoVehicle>
 
           <DescriptionVehicle>
-            <h2>Preço: R$ {formattedPrice}</h2>
-            <p>{createHtmlElementRed('Descrição')}{vehicle?.description}</p>
-            <p>{createHtmlElementRed('Marca')}{vehicle?.brand}</p>
-            <p>{createHtmlElementRed('Modelo do Carro')}{vehicle?.modelCar}</p>
-            <p>{createHtmlElementRed('Tração')}{vehicle?.traction}</p>
-            <p>{createHtmlElementRed('Carroceria')}{vehicle?.bodywork}</p>
-            <p>{createHtmlElementRed('Ano Modelo')}{vehicle?.yearModel}</p>
-            <p>{createHtmlElementRed('Ano Fabricação')}{vehicle?.yearFabrication}</p>
+            <h2>Preço: {verifyPrice(formattedPrice)}</h2>
+            <p>{createHtmlElementRed('Descrição', vehicle?.description)}{vehicle?.description}</p>
+            <p>{createHtmlElementRed('Marca', vehicle?.brand)}{vehicle?.brand}</p>
+            <p>{createHtmlElementRed('Modelo do Carro', vehicle?.modelCar)}{vehicle?.modelCar}</p>
+            <p>{createHtmlElementRed('Tração', vehicle?.traction)}{vehicle?.traction}</p>
+            <p>{createHtmlElementRed('Carroceria', vehicle?.bodywork)}{vehicle?.bodywork}</p>
+            <p>{createHtmlElementRed('Ano Modelo', vehicle?.yearModel)}{vehicle?.yearModel}</p>
+            <p>{createHtmlElementRed('Ano Fabricação', vehicle?.yearFabrication)}{vehicle?.yearFabrication}</p>
             <button><a href="">Entre em Contato</a></button>
           </DescriptionVehicle>
         </>

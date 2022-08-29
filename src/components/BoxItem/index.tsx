@@ -1,6 +1,7 @@
 
 import { Box, Badge, Image } from '@chakra-ui/react';
 import Link from 'next/link';
+import { verifyPrice } from '../../utils/methods';
 import { BoxItemProps } from './BoxItem';
 
 
@@ -9,6 +10,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
+
 
   return (
     <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
@@ -36,7 +38,7 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
           </Box>
 
           <Box style={{ marginTop: '3px' }}>
-            R$ {formattedPrice}
+            {verifyPrice(formattedPrice)}
           </Box>
 
           <Box
