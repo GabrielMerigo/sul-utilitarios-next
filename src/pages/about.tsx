@@ -3,6 +3,8 @@ import { Header } from "../components/Header";
 import { LineHeaderRed } from "../components/LineHeaderRed";
 import { LineTitle } from "../components/LineTitle";
 import { AboutContainer } from '../styles/AboutContainer';
+import BackgroundImage from '../assets/background.jpg'
+import Image from 'next/image'
 
 export default function About() {
   return (
@@ -11,7 +13,10 @@ export default function About() {
       <LineHeaderRed />
       <LineTitle title="Sobre" />
       <AboutContainer>
-        <div className="imgCompany"></div>
+        <div className="imgCompany">
+          <Image src={BackgroundImage} alt="foto de um caminhão virado para direita" />   
+        </div>
+
         <div className="aboutCompany">
           <h2>Conheça a Sul Utilitários</h2>
           <p>Em meados de 2004 o comerciante e empresario natural da cidade de Veranópolis começou as atividades no ramo

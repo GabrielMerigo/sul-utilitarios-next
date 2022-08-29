@@ -5,10 +5,9 @@ export const AboutContainer = styled.section`
   flex-direction:column;
 
   .imgCompany{
-    background-color: rgb(200, 200, 500);
-    width: 60rem;
     margin: 0 auto;
-    padding-top: 25rem;
+    width: 60rem;
+    height: fit-content;
     border: 1px solid black;
 
     @media(max-width: 900px) {
