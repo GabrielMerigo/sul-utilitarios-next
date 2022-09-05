@@ -87,7 +87,7 @@ export default function Home({ vehiclesJSON }) {
 
         <div>
           <h2>Depoimentos</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus voluptates necessitatibus culpa, ratione deleniti magnam ullam vero consectetur voluptatibus incidunt est quos quidem, aperiam officiis repellendus, labore veniam possimus dolor!</p>
+          <p>Sul Ultilitários é uma ótima empresa! Sempre foi exemplo no ramo onde sempre tive orgulho de excer meu trabalho.</p>
           <div>
             <h3>- Everson Merigo</h3>
           </div>
