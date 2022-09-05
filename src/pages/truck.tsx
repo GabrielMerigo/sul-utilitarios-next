@@ -1,7 +1,6 @@
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { InfoVehicle, DescriptionVehicle, WrapperInfo, ParentImage } from '../styles/Vehicle';
-import Image from 'next/image';
 import { LineTitle } from "../components/LineTitle";
 import { LineHeaderRed } from "../components/LineHeaderRed";
 import Slider from "react-slick";
@@ -117,15 +116,15 @@ export default function Vehicle() {
 
   return (
     <>
-    <Header />
-    <WrapperInfo>
-      <LineHeaderRed />
-      {loading ? (
-        <Spinner>
-          <ImSpinner2 className="loader" />
-        </Spinner>
-      ) : (
-        <>
+      <Header />
+      <WrapperInfo>
+        <LineHeaderRed />
+        {loading ? (
+          <Spinner>
+            <ImSpinner2 className="loader" />
+          </Spinner>
+        ) : (
+          <>
             <LineTitle title={vehicle?.title} />
             <InfoVehicle>
               <Slider {...settings}>
@@ -140,15 +139,15 @@ export default function Vehicle() {
             </InfoVehicle>
 
             <DescriptionVehicle>
-            <h2>Preço: {verifyPrice(formattedPrice)}</h2>
-            <p>{createHtmlElementRed('Descrição', vehicle?.description)}{vehicle?.description}</p>
-            <p>{createHtmlElementRed('Marca', vehicle?.brand)}{vehicle?.brand}</p>
-            <p>{createHtmlElementRed('Modelo do Carro', vehicle?.modelCar)}{vehicle?.modelCar}</p>
-            <p>{createHtmlElementRed('Tração', vehicle?.traction)}{vehicle?.traction}</p>
-            <p>{createHtmlElementRed('Carroceria', vehicle?.bodywork)}{vehicle?.bodywork}</p>
-            <p>{createHtmlElementRed('Ano Modelo', vehicle?.yearModel)}{vehicle?.yearModel}</p>
-            <p>{createHtmlElementRed('Ano Fabricação', vehicle?.yearFabrication)}{vehicle?.yearFabrication}</p>
-            <button><a href="">Entre em Contato</a></button>
+              <h2>Preço: {verifyPrice(formattedPrice)}</h2>
+              <p>{createHtmlElementRed('Descrição', vehicle?.description)}{vehicle?.description}</p>
+              <p>{createHtmlElementRed('Marca', vehicle?.brand)}{vehicle?.brand}</p>
+              <p>{createHtmlElementRed('Modelo do Carro', vehicle?.modelCar)}{vehicle?.modelCar}</p>
+              <p>{createHtmlElementRed('Tração', vehicle?.traction)}{vehicle?.traction}</p>
+              <p>{createHtmlElementRed('Carroceria', vehicle?.bodywork)}{vehicle?.bodywork}</p>
+              <p>{createHtmlElementRed('Ano Modelo', vehicle?.yearModel)}{vehicle?.yearModel}</p>
+              <p>{createHtmlElementRed('Ano Fabricação', vehicle?.yearFabrication)}{vehicle?.yearFabrication}</p>
+              <button><a href="">Entre em Contato</a></button>
             </DescriptionVehicle>
           </>
         )}

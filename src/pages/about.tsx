@@ -5,16 +5,18 @@ import { LineTitle } from "../components/LineTitle";
 import { AboutContent, AboutContainer } from '../styles/AboutContainer';
 import BackgroundImage from '../assets/background.jpg'
 import Image from 'next/image'
+import { ButtonWhatsApp } from "../components/ButtonWhatsapp";
 
 export default function About() {
   return (
     <AboutContainer>
+      <ButtonWhatsApp />
       <Header />
       <LineHeaderRed />
       <LineTitle title="Sobre" />
       <AboutContent>
         <div className="imgCompany">
-          <Image src={BackgroundImage} alt="foto de um caminhão virado para direita" />   
+          <Image src={BackgroundImage} alt="foto de um caminhão virado para direita" />
         </div>
 
         <div className="aboutCompany">
@@ -26,7 +28,6 @@ export default function About() {
         </div>
 
         <div className="aboutOwner">
-          <div className="imgOwner"></div>
           <p>
             Trabalhando desta forma obteve muito sucesso no ramo de venda de veículos fidelizando a clientela com um
             trabalho serio e eficiente. Mais tarde mudou a razão social para Sul Utilitários, se especializando na venda

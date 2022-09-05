@@ -9,6 +9,7 @@ import { LineTitle } from '../components/LineTitle';
 import { Alert, AlertIcon } from '@chakra-ui/react';
 import { BoxItem } from "../components/BoxItem";
 import { db, collection, getDocs } from "../services/firebase";
+import { ButtonWhatsApp } from '../components/ButtonWhatsapp';
 
 export default function Storage() {
   const [cars, setCars] = useState<VehiclesTypes[]>([]);
@@ -43,6 +44,7 @@ export default function Storage() {
 
   return (
     <>
+      <ButtonWhatsApp />
       <Header />
       <LineHeaderRed />
 
@@ -55,24 +57,24 @@ export default function Storage() {
           <LineTitle title="Carros" />
           <CarList>
             <div className="boxCars">
-                {!cars.length ? (
-                  <AlertWrapper>
-                    <Alert className="warning" status='warning'>
-                      <AlertIcon /> Ainda não há carros em estoque...
-                    </Alert>
-                  </AlertWrapper>
-                ) : (
-                  cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
-                    <BoxItem
-                      key={index}
-                      mainImage={mainImage}
-                      title={title}
-                      description={description}
-                      priceFormatted={priceFormatted}
-                      id={id}
-                      isVehicle={true}
-                    />
-                  )
+              {!cars.length ? (
+                <AlertWrapper>
+                  <Alert className="warning" status='warning'>
+                    <AlertIcon /> Ainda não há carros em estoque...
+                  </Alert>
+                </AlertWrapper>
+              ) : (
+                cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
+                  <BoxItem
+                    key={index}
+                    mainImage={mainImage}
+                    title={title}
+                    description={description}
+                    priceFormatted={priceFormatted}
+                    id={id}
+                    isVehicle={true}
+                  />
+                )
                 ))}
             </div>
           </CarList>

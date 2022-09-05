@@ -15,6 +15,7 @@ import {
   Map,
   WrapperBanner
 } from '../styles/Home';
+import { ButtonWhatsApp } from "../components/ButtonWhatsapp";
 export interface VehiclesTypes {
   createdAt: { seconds: number; }
   mainImage: MainImage;
@@ -40,10 +41,11 @@ export default function Home({ vehiclesJSON }) {
   return (
     <>
       <Header />
+      <ButtonWhatsApp />
       <WrapperBanner>
         <div>
-          <div style={{ height: '200px' }}>
-            <h1>O melhor do comércio automotivo é na <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
+          <div style={{ height: '300px' }}>
+            <h1>O melhor negócio para caminhões utilitários é na {<br />} <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
           </div>
         </div>
       </WrapperBanner>
