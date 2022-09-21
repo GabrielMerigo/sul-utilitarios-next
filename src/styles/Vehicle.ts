@@ -10,7 +10,6 @@ export const InfoVehicle = styled.div`
   display: inline-block;
   width: 39.6rem;
   padding: 0 2%;
-  /* max-width: 700px; */
   align-items: middle;
   margin-top: 1rem;
 
@@ -18,19 +17,15 @@ export const InfoVehicle = styled.div`
     filter: brightness(0.8);
     transition: all 400ms;
   }
-
     
   @media(max-width: 900px) {
-    margin: 1rem;
-    width: 30rem;
+    width: 87vw;
     text-align: left;
 
     & > div{
-      margin: 0.6rem;
 
       & > img{
-        width: 10rem;
-        background-size: cover; //imagem cobre toda área do div
+        width: 100%;
       }
     }
   }
@@ -79,8 +74,4 @@ export const DescriptionVehicle = styled.div`
 
 export const ParentImage = styled.div`
   border: 1px solid black;
-
-  img {
-    
-  }
 `
