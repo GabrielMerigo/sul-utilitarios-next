@@ -21,4 +21,6 @@ export const Container = styled.div`
     filter: brightness(0.8);
     transition: 500ms all;
   }
+
+  z-index: 100000;
 `;

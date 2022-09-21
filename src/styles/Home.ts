@@ -36,7 +36,7 @@ export const WrapperBanner = styled.div`
   }
 
   .img{
-    margin-left: 21.5rem;
+    margin-left: 3rem;
   }
 
   div{
@@ -137,7 +137,7 @@ export const Description = styled.div`
       flex-direction: column;
 
       div{
-        margin-left: 3rem;
+        padding-left: 3rem;
         ul li{
           margin-top: 10px;
         }
@@ -188,6 +188,20 @@ export const Description = styled.div`
       }
     }
   }
+
+  @media(max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+    
+    div:nth-child(1) {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    div:nth-child(2) {
+      width: 100%;
+    }
+  }
 `;
 
 export const Local = styled.div`
@@ -222,23 +236,16 @@ export const Local = styled.div`
 export const Map = styled.section`
 	border-top: 2px solid var(--gray-dark);
 	background: var(--gray-light);
-	height: 30rem;
-	width: 100%;
+	height: fit-content;
   display: flex;
   justify-content: center;
-  
+  width: 100vw;
 
   iframe{
     border: 3px solid #333333;
-    margin: 1.5rem auto;
+    margin: 2rem 1rem;
     height: 432px;
-    width: 47.5rem;
-
-    @media(max-width: 900px) {
-      margin: 1.5rem auto;
-      width: 30rem;
-      height: 380px;
-    }
+    width: 100%;
   }
 `;
 

@@ -44,7 +44,7 @@ export default function Home({ vehiclesJSON }) {
       <ButtonWhatsApp />
       <WrapperBanner>
         <div>
-          <div style={{ height: '300px' }}>
+          <div className="img" style={{ height: '300px' }}>
             <h1>O melhor negócio para caminhões utilitários é na {<br />} <span style={{ color: '#fa5d41' }}>Sul Ultilitários</span>.</h1>
           </div>
         </div>
@@ -100,9 +100,7 @@ export default function Home({ vehiclesJSON }) {
         </div>
 
         <Map>
-          <div>
-            <iframe src="https://maps.google.com/maps?width=595&height=400&hl=en&q=Avenida%20sertorio,7140%20Porto%20Alegre+(Loja%20-%20Sul%20Ultilit%C3%A1rios)&t=&z=16&ie=UTF8&iwloc=B&output=embed"></iframe>
-          </div>
+          <iframe src="https://maps.google.com/maps?width=595&height=400&hl=en&q=Avenida%20sertorio,7140%20Porto%20Alegre+(Loja%20-%20Sul%20Ultilit%C3%A1rios)&t=&z=16&ie=UTF8&iwloc=B&output=embed"></iframe>
         </Map>
       </Local>
       <Footer marginTop="0" position="static" direction="0" />
