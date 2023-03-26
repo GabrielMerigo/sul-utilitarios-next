@@ -1,9 +1,7 @@
 import { Box, Badge, Image } from '@chakra-ui/react';
-import { format } from 'date-fns';
 import Link from 'next/link';
 import { FirebaseVehicleProps } from '../../types/VehiclesTypes';
 import { verifyPrice } from '../../utils/methods';
-import { BoxItemProps } from './BoxItem';
 
 export function BoxItem({ ...vehicle }: FirebaseVehicleProps) {
   const formattedPrice = Number(vehicle.vehiclePrice).toLocaleString('pt-BR', {

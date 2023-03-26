@@ -1,7 +1,6 @@
 import { FirebaseVehicleProps } from './../types/VehiclesTypes';
 import { onSnapshot } from 'firebase/firestore';
 import { vehiclesCollection } from './../services/firebase';
-import { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
 
 export const fetchVehicles = async () => {

@@ -3,7 +3,6 @@ import { CarList, Spinner, AlertWrapper } from '../styles/Storage';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { LineHeaderRed } from '../components/LineHeaderRed';
-import { VehiclesTypes } from './index';
 import { ImSpinner2 } from 'react-icons/im';
 import { LineTitle } from '../components/LineTitle';
 import { Alert, AlertIcon } from '@chakra-ui/react';
