@@ -1,38 +1,44 @@
 import { useEffect, useState } from 'react';
 import { CarList, Spinner, AlertWrapper } from '../styles/Storage';
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { LineHeaderRed } from "../components/LineHeaderRed";
-import { VehiclesTypes } from "./index";
-import { ImSpinner2 } from "react-icons/im";
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { LineHeaderRed } from '../components/LineHeaderRed';
+import { VehiclesTypes } from './index';
+import { ImSpinner2 } from 'react-icons/im';
 import { LineTitle } from '../components/LineTitle';
 import { Alert, AlertIcon } from '@chakra-ui/react';
-import { BoxItem } from "../components/BoxItem";
-import { db, collection, getDocs } from "../services/firebase";
+import { BoxItem } from '../components/BoxItem';
+import { vehiclesCollection } from '../services/firebase';
 import { ButtonWhatsApp } from '../components/ButtonWhatsapp';
+import { FirebaseVehicleProps } from '../types/VehiclesTypes';
+import { getDocs } from 'firebase/firestore';
 
 export default function Storage() {
-  const [cars, setCars] = useState<VehiclesTypes[]>([]);
-  const [trucks, setTrucks] = useState<VehiclesTypes[]>([]);
+  const [cars, setCars] = useState<FirebaseVehicleProps[]>([]);
+  const [trucks, setTrucks] = useState<FirebaseVehicleProps[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function getVehicles() {
-    const vehiclesCol = collection(db, 'vehicles');
-    const vehicleSnapshot = await getDocs(vehiclesCol);
-    const vehicleList = vehicleSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })) as Array<VehiclesTypes>;
-    return vehicleList
+    const vehicleSnapshot = await getDocs(vehiclesCollection);
+    const vehicles = vehicleSnapshot.docs.map((doc) => ({
+      ...doc.data(),
+    })) as FirebaseVehicleProps[];
+    const orderedVehicles = vehicles.sort((a, b) => {
+      return b.created_at.toDate().getTime() - a.created_at.toDate().getTime();
+    });
+    return orderedVehicles;
   }
 
   async function renderVehicles() {
     try {
       setLoading(true);
       const resVehicles = await getVehicles();
-      const trucksFiltered = resVehicles.filter((vehicle: VehiclesTypes) => vehicle.isTruck);
-      const carsFiltered = resVehicles.filter((vehicle: VehiclesTypes) => !vehicle.isTruck);
-      setTrucks(trucksFiltered)
+      const trucksFiltered = resVehicles.filter((vehicle) => vehicle.vehicleType === 'Caminhão');
+      const carsFiltered = resVehicles.filter((vehicle) => vehicle.vehicleType === 'Carro');
+      setTrucks(trucksFiltered);
       setCars(carsFiltered);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -40,7 +46,7 @@ export default function Storage() {
 
   useEffect(() => {
     renderVehicles();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -59,45 +65,44 @@ export default function Storage() {
             <div className="boxCars">
               {!cars.length ? (
                 <AlertWrapper>
-                  <Alert className="warning" status='warning'>
+                  <Alert className="warning" status="warning">
                     <AlertIcon /> Ainda não há carros em estoque...
                   </Alert>
                 </AlertWrapper>
               ) : (
-                cars.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
+                cars.map(({ ...vehicle }) => (
                   <BoxItem
-                    key={index}
-                    mainImage={mainImage}
-                    title={title}
-                    description={description}
-                    priceFormatted={priceFormatted}
-                    id={id}
-                    isVehicle={true}
+                    key={vehicle.vehicleId}
+                    vehicleId={vehicle.vehicleId}
+                    mainImageUrl={vehicle.mainImageUrl}
+                    vehicleName={vehicle.vehicleName}
+                    description={vehicle.description}
+                    vehiclePrice={vehicle.vehiclePrice}
+                    vehicleType={vehicle.vehicleType}
                   />
-                )
-                ))}
+                ))
+              )}
             </div>
           </CarList>
 
           <LineTitle title="Caminhões" />
           <CarList>
             <div className="boxCars">
-              {trucks.map(({ mainImage, title, description, priceFormatted, isTruck, id }, index) => (
+              {trucks.map(({ ...vehicle }) => (
                 <BoxItem
-                  isVehicle={false}
-                  key={index}
-                  mainImage={mainImage}
-                  title={title}
-                  description={description}
-                  priceFormatted={priceFormatted}
-                  id={id}
+                  key={vehicle.vehicleId}
+                  mainImageUrl={vehicle.mainImageUrl}
+                  vehicleName={vehicle.vehicleName}
+                  description={vehicle.description}
+                  vehiclePrice={vehicle.vehiclePrice}
+                  vehicleId={vehicle.vehicleId}
                 />
               ))}
             </div>
 
             {!trucks.length && (
               <AlertWrapper>
-                <Alert className="warning" status='warning'>
+                <Alert className="warning" status="warning">
                   <AlertIcon /> Ainda não há caminhões em estoque...
                 </Alert>
               </AlertWrapper>
@@ -108,5 +113,5 @@ export default function Storage() {
 
       <Footer marginTop="10" position="static" direction="0" />
     </>
-  )
+  );
 }

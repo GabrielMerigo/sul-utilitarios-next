@@ -1,16 +1,7 @@
-export interface MainImage {
-  error: boolean;
-  id: string;
-  idMainImage: string;
-  name: string;
-  preview: string;
-  progress: number;
-  readableSize: string;
-  uploaded: boolean;
-  url: string;
-}
+import { Timestamp } from 'firebase/firestore';
+import { Dispatch, SetStateAction } from 'react';
 
-export interface BoxItemProps {
+export type FirebaseVehicleProps = {
   vehicleId: string;
   vehicleType: string;
   vehicleName: string;
@@ -23,6 +14,17 @@ export interface BoxItemProps {
   bodywork: string;
   description: string;
   created_at: Timestamp;
+  isNew: Boolean;
   imagesUrl: CloudImagesArrayProps;
   mainImageUrl: CloudMainImageImageProps;
-}
+};
+
+export type CloudMainImageImageProps = {
+  name: string;
+  url: string;
+};
+
+export type CloudImagesArrayProps = {
+  name: string;
+  url: string;
+}[];

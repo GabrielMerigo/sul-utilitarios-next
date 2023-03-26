@@ -1,18 +1,23 @@
-import * as firebase from 'firebase/app';
-import { getFirestore, collection, getDocs, getDoc, doc } from 'firebase/firestore/lite';
-import 'firebase/firestore';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import { collection, getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
+  apiKey: 'AIzaSyA1OJHETcfeK_0w2kXDOCZyJDOLuZz4rLQ',
+  authDomain: 'sul-utilitarios.firebaseapp.com',
+  projectId: 'sul-utilitarios',
+  storageBucket: 'sul-utilitarios.appspot.com',
+  messagingSenderId: '143328299951',
+  appId: '1:143328299951:web:e70b4ebb1bff7ce0c67d5a',
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-export { db, collection, getDocs, getDoc, doc }
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+export const vehiclesCollection = collection(db, 'Vehicles');

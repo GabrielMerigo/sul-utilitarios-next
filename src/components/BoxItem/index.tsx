@@ -1,26 +1,38 @@
-
 import { Box, Badge, Image } from '@chakra-ui/react';
+import { format } from 'date-fns';
 import Link from 'next/link';
+import { FirebaseVehicleProps } from '../../types/VehiclesTypes';
 import { verifyPrice } from '../../utils/methods';
 import { BoxItemProps } from './BoxItem';
 
-
-export function BoxItem({ mainImage, title, description, priceFormatted, isNew, id, isVehicle }: BoxItemProps) {
-  const formattedPrice = Number(priceFormatted).toLocaleString('pt-BR', {
+export function BoxItem({ ...vehicle }: FirebaseVehicleProps) {
+  const formattedPrice = Number(vehicle.vehiclePrice).toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   });
 
-
   return (
-    <Link href={`${isVehicle ? 'vehicle' : 'truck'}?id=${id}`} passHref>
+    <Link
+      href={`${vehicle.vehicleType === 'Carro' ? 'vehicle' : 'truck'}?id=${vehicle.vehicleId}`}
+      passHref
+    >
       <Box width={295} borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Image height="15rem" width="30rem" src={mainImage.url} alt={description} />
+        <Image
+          height="15rem"
+          width="30rem"
+          src={vehicle.mainImageUrl.url}
+          alt={vehicle.vehicleName}
+        />
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">
-            {isNew && (
-              <Badge style={{ marginLeft: '-5px', marginRight: '5px' }} borderRadius="full" px="2" colorScheme="teal">
+            {vehicle.isNew && (
+              <Badge
+                style={{ marginLeft: '-5px', marginRight: '5px' }}
+                borderRadius="full"
+                px="2"
+                colorScheme="teal"
+              >
                 Novo
               </Badge>
             )}
@@ -33,27 +45,17 @@ export function BoxItem({ mainImage, title, description, priceFormatted, isNew, 
               ml="2"
               style={{ fontSize: '1rem', margin: 0 }}
             >
-              {title}
+              {vehicle.vehicleName}
             </Box>
           </Box>
 
-          <Box style={{ marginTop: '3px' }}>
-            {verifyPrice(formattedPrice)}
-          </Box>
+          <Box style={{ marginTop: '3px' }}>{verifyPrice(formattedPrice)}</Box>
 
-          <Box
-            color="gray.500"
-            mt="1"
-            fontWeight="semibold"
-            as="h4"
-            lineHeight="tight"
-            isTruncated
-
-          >
-            {description}
+          <Box color="gray.500" mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+            {vehicle.description}
           </Box>
         </Box>
       </Box>
     </Link>
-  )
+  );
 }
